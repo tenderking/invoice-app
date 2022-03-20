@@ -1,0 +1,108 @@
+/* colors */
+:root {
+	--primary-60: hsl(252, 94%, 67%);
+	--primary-70: hsl(252, 100%, 73%);
+
+	--secondary-15: hsl(233, 31%, 17%);
+	--secondary-10: hsl(233, 29%, 11%);
+	--secondary-20: hsl(233, 31%, 21%);
+
+	--neutral-95: hsl(240, 20%, 98%);
+	--neutral-90: hsl(231, 72%, 93%);
+	--neutral-65: hsl(231, 37%, 63%);
+	--neutral-60: hsl(231, 20%, 61%);
+	--neutral-40: hsla(231, 20%, 27%, 1);
+	--neutral-10: hsl(228, 28%, 7%);
+	--neutral-100: white;
+
+	--error-60: hsl(0, 80%, 63%);
+	--error-80: hsl(0, 100%, 80%);
+
+	--warning-60: hsl(34, 100%, 50%);
+	--warning-80: hsla(34, 100%, 50%, 0.057);
+
+	--success-80: hsla(160, 67%, 52%, 0.057);
+	--success-60: hsl(160, 67%, 52%);
+}
+@media (prefers-color-scheme: light) {
+	:root {
+		--color-background: var(--neutral-95);
+		--color-background-mute: var(--neutral-100);
+		--color-background-soft: var(--neutral-95);
+		--color-background-misc: var(--neutral-40);
+		--color-background-nav: var(--neutral-40);
+		--color-text: var(--neutral-10);
+		--color-text-soft: var(--neutral-60);
+	}
+}
+@media (prefers-color-scheme: dark) {
+	:root {
+		--color-background: var(--secondary-10);
+		--color-background-mute: var(--secondary-15);
+		--color-background-soft: var(--secondary-20);
+		--color-background-misc: var(--neutral-10);
+		--color-background-nav: var(--secondary-15);
+		--color-text: var(--neutral-100);
+		--color-text-soft: var(--neutral-90);
+	}
+}
+
+/* drop-shadows */
+$shadow-date: 0px 4px 4px 0px hsla(0, 0%, 0%, 0.25);
+$shadow-filter: 0px 10px 20px 0px hsla(231, 38%, 45%, 0.25);
+$shadow-invoice: 0px 10px 10px -10px hsla(231, 38%, 45%, 0.1);
+
+/* border-radius */
+$radius-button: 24px;
+$radius-side-bar: 20px;
+$radius-forms: 4px;
+$radius-invoice: 8px;
+$radius-status: 6px;
+
+/* opacity */
+$opacity: 0.057;
+
+/* padding */
+$pd-dt-invoices: 72px;
+$pd-tb-view-invoice: 64px auto;
+$pd-tb-invoices: 56px 48px;
+$pd-tb-view-invoice: 48px 40px;
+$pd-mb-invoices: 32px 24px;
+
+$pd-dt-form: 56px;
+$pd-tb-form: 56px;
+$pd-mb-form: 32px 24px;
+
+$pd-mb-modal: 32px;
+$pd-tb-modal: 48px;
+$pd-dt-modal: 48px;
+
+/* fonts */
+
+/* line height */
+$font-body-lh: 1.25;
+$font-body2-lh: 1.5;
+$font-h4-lh: 1.25;
+$font-h3-lh: 1.5;
+$font-h2-lh: 1.1;
+$font-h1-lh: 1.125;
+
+/* size */
+$font-body-size: 1rem;
+$font-body2-size: 0.917rem;
+$font-h4-size: 1rem;
+$font-h3-size: 1.33rem;
+$font-h2-size: 1.67rem;
+$font-h1-size: 2.67rem;
+
+/* spacing */
+$font-body-spacing: -0.25;
+$font-body2-spacing: -0.23;
+$font-h4-spacing: -0.25;
+$font-h3-spacing: -0.8;
+$font-h2-spacing: -0.63;
+$font-h1-spacing: -1;
+
+/* media queries */
+$sz-desktop: 1000px;
+$sz-tablet: 600px;
