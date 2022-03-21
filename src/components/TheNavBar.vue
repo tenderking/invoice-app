@@ -2,7 +2,9 @@
 	<nav>
 		<IconLogoBg />
 		<div class="nav">
-			<IconTheme />
+			<div class="icon">
+				<IconTheme />
+			</div>
 			<img
 				src="@/assets/image-avatar.jpg"
 				class="nav__avatar"
@@ -18,11 +20,12 @@
 
 <style lang="scss" scoped>
 	nav {
-		position: fixed;
+		// position: fixed;
+		--color-border: hsl(232, 20%, 36%);
 		display: flex;
 		justify-content: space-between;
-		top: 0;
-		width: 100%;
+
+		height: 100%;
 		background-color: var(--color-background-nav);
 		.nav {
 			display: flex;
@@ -30,7 +33,11 @@
 			justify-content: center;
 			gap: 32px;
 			align-items: center;
-			padding: 1rem 32px;
+			padding-inline-end: 32px;
+			.icon {
+				padding: 28px 32px;
+				border-right: solid 1px var(--color-border);
+			}
 
 			&__avatar {
 				border-radius: 100%;
@@ -40,12 +47,20 @@
 	}
 	@media screen and (min-width: $sz-tablet) {
 		nav {
-			height: 100%;
 			flex-direction: column;
-			width: initial;
+			border-radius: 0 $radius-nav $radius-nav 0;
 			.nav {
+				padding-inline-end: 0;
+				padding-block-end: 32px;
+				.icon {
+					padding: 32px 28px;
+					border-bottom: solid 1px var(--color-border);
+					border-right: 0;
+				}
 				flex-direction: column;
-				padding: 32px 1rem;
+				&__avatar {
+					width: 32px;
+				}
 			}
 		}
 	}
