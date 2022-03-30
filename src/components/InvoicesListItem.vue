@@ -7,11 +7,11 @@
 		item: Object,
 	});
 	const colr = ref("");
-	const bg = ref(""),
+	const bg = ref("");
 
 	switch (props.item?.status) {
 		case "paid":
-			colr.value = (store.statusColor.paid.text);
+			colr.value = store.statusColor.paid.text;
 			bg.value = store.statusColor.paid.bg;
 			console.log("we are here", colr.value);
 			break;
@@ -24,10 +24,6 @@
 			bg.value = store.statusColor.draft.bg;
 			console.log("we are here", colr.value);
 			break;
-	}
-	const styleObject = {
-		color: colr.value,
-		background-color: bg.value,
 	}
 </script>
 <template>
