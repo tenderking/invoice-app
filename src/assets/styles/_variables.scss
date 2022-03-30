@@ -3,21 +3,21 @@
 	--primary-60: hsl(252, 94%, 67%);
 	--primary-70: hsl(252, 100%, 73%);
 
-	--secondary-15: hsl(233, 31%, 17%);
 	--secondary-10: hsl(233, 29%, 11%);
+	--secondary-15: hsl(233, 31%, 17%);
 	--secondary-20: hsl(233, 31%, 21%);
+	--secondary-60: hsl(231, 37%, 63%);
+	--secondary-90: hsl(231, 67%, 99%);
 
-	--neutral-95: hsl(240, 20%, 98%);
-	--neutral-90: hsl(231, 72%, 93%);
-	--neutral-65: hsl(231, 37%, 63%);
-	--neutral-60: hsl(231, 20%, 61%);
-	--neutral-40: hsla(231, 20%, 27%, 1);
 	--neutral-10: hsl(228, 28%, 7%);
+	--neutral-40: hsla(231, 20%, 27%, 1);
+	--neutral-60: hsl(231, 20%, 61%);
+	--neutral-80: hsl(231, 72%, 93%);
+	--neutral-90: hsl(240, 20%, 98%);
 	--neutral-100: white;
 
 	--error-60: hsl(0, 80%, 63%);
 	--error-80: hsl(0, 100%, 80%);
-
 	--warning-60: hsl(34, 100%, 50%);
 	--warning-80: hsla(34, 100%, 50%, 0.057);
 
@@ -26,13 +26,16 @@
 }
 @media (prefers-color-scheme: light) {
 	:root {
-		--color-background: var(--neutral-95);
+		--color-background: var(--neutral-90);
 		--color-background-mute: var(--neutral-100);
-		--color-background-soft: var(--neutral-95);
+		--color-background-soft: var(--neutral-90);
 		--color-background-misc: var(--neutral-40);
 		--color-background-nav: var(--neutral-40);
 		--color-text: var(--neutral-10);
-		--color-text-soft: var(--neutral-60);
+		--color-text-soft: var(--secondary-60);
+		--color-btn-light-bg: var(--secondary-90);
+		--color-btn-light-text: var(--secondary-60);
+		--color-draft: var(--neutral-40);
 	}
 }
 @media (prefers-color-scheme: dark) {
@@ -43,8 +46,35 @@
 		--color-background-misc: var(--neutral-10);
 		--color-background-nav: var(--secondary-15);
 		--color-text: var(--neutral-100);
-		--color-text-soft: var(--neutral-90);
+		--color-text-soft: var(--neutral-80);
+		--color-btn-light-bg: var(--secondary-20);
+		--color-btn-light-text: var(--neutral-80);
+		--color-draft: var(--neutral-80);
 	}
+}
+.dark {
+	--color-background: var(--secondary-10);
+	--color-background-mute: var(--secondary-15);
+	--color-background-soft: var(--secondary-20);
+	--color-background-misc: var(--neutral-10);
+	--color-background-nav: var(--secondary-15);
+	--color-text: var(--neutral-100);
+	--color-text-soft: var(--neutral-80);
+	--color-btn-light-bg: var(--secondary-20);
+	--color-btn-light-text: var(--neutral-80);
+	--color-draft: var(--neutral-80);
+}
+.light {
+	--color-background: var(--neutral-90);
+	--color-background-mute: var(--neutral-100);
+	--color-background-soft: var(--neutral-90);
+	--color-background-misc: var(--neutral-40);
+	--color-background-nav: var(--neutral-40);
+	--color-text: var(--neutral-10);
+	--color-text-soft: var(--secondary-60);
+	--color-btn-light-bg: var(--secondary-90);
+	--color-btn-light-text: var(--secondary-60);
+	--color-draft: var(--neutral-40);
 }
 
 /* drop-shadows */
@@ -88,12 +118,12 @@ $font-h2-lh: 1.1;
 $font-h1-lh: 1.125;
 
 /* size */
-$font-body-size: 1rem;
-$font-body2-size: 0.917rem;
-$font-h4-size: 1rem;
-$font-h3-size: 1.33rem;
-$font-h2-size: 1.67rem;
-$font-h1-size: 2.67rem;
+$fs-body: 1rem;
+$fs-body2: 0.917rem;
+$fs-h4: 1rem;
+$fs-h3: 1.3333rem;
+$fs-h2: 1.6667rem;
+$fs-h1: 2.6667rem;
 
 /* spacing */
 $font-body-spacing: -0.25;
@@ -105,4 +135,4 @@ $font-h1-spacing: -1;
 
 /* media queries */
 $sz-desktop: 1000px;
-$sz-tablet: 600px;
+$sz-tablet: 760px;

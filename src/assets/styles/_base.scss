@@ -9,7 +9,9 @@
 }
 
 /* colors depending on theme */
-
+html {
+	font-size: 12px;
+}
 body {
 	min-height: 100vh;
 	color: var(--color-text);
@@ -17,35 +19,103 @@ body {
 	transition: color 0.5s, background-color 0.5s;
 	line-height: 1.25;
 	font-family: "Spartan", sans-serif;
-	font-size: 12px;
+
 	text-rendering: optimizeLegibility;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	outline: solid;
 }
+h1,
+h2,
+h3,
+h4 {
+	font-weight: bold;
+}
 
 h1 {
-	font-size: $font-h1-size;
+	font-size: $fs-h1;
 	line-height: $font-h1-lh;
 	letter-spacing: $font-h1-spacing;
 }
 h2 {
-	font-size: $font-h2-size;
+	font-size: $fs-h2;
 	line-height: $font-h2-lh;
 	letter-spacing: $font-h2-spacing;
 }
 h3 {
-	font-size: $font-h3-size;
+	font-size: $fs-h3;
 	line-height: $font-h3-lh;
 	letter-spacing: $font-h3-spacing;
 }
 h4 {
-	font-size: $font-h4-size;
+	font-size: $fs-h4;
 	line-height: $font-h4-lh;
 	letter-spacing: $font-h4-spacing;
+	text-transform: capitalize;
 }
 p {
-	font-size: $font-body-size;
+	font-size: $fs-body;
 	line-height: $font-body-lh;
 	letter-spacing: $font-body-spacing;
 }
+.body-2 {
+	font-size: $fs-body2;
+	line-height: $font-body2-lh;
+	letter-spacing: $font-body2-spacing;
+}
+/* composition */
+/* utilities */
+.wrapper-1 {
+	margin-inline: auto;
+	margin-top: 2.667rem;
+}
+.p-2 {
+	padding: 2rem;
+}
+.p-1 {
+	padding: 2rem;
+}
+.flex-flow {
+	display: flex;
+	gap: 1em;
+	justify-content: space-between;
+	align-items: center;
+}
+.flex-flow-2 {
+	display: flex;
+	gap: 1em;
+	// justify-content: space-between;
+	align-items: center;
+}
+/* block */
+.shadow-date {
+	box-shadow: $shadow-date;
+}
+.shadow-filter {
+	box-shadow: $shadow-filter;
+}
+.shadow-invoice {
+	box-shadow: $shadow-invoice;
+}
+.br-8 {
+	border-radius: $radius-invoice;
+}
+.br-6 {
+	border-radius: $radius-status;
+}
+.br-4 {
+	border-radius: $radius-forms;
+}
+.br-24 {
+	border-radius: $radius-button;
+}
+.pb-2 {
+	padding-bottom: 2rem;
+}
+.pb-1 {
+	padding-bottom: 1rem;
+}
+.soft-color {
+	color: var(--color-text-soft);
+}
+/* execption */
