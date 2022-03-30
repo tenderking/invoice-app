@@ -1,11 +1,16 @@
 <script setup lang="ts">
 	import TheNavBar from "./components/TheNavBar.vue";
+	import InvoiceList from "./components/InvoiceList.vue";
+	import ViewInvoice from "./components/ViewInvoice.vue";
+	import ViewInvoiceNav from "./components/ViewInvoiceNav.vue";
 </script>
 
 <template>
 	<header><TheNavBar /></header>
 	<main>
-		<h1>Hello</h1>
+		<InvoiceList />
+		<!-- <ViewInvoiceNav /> -->
+		<!-- <ViewInvoice /> -->
 	</main>
 </template>
 <style lang="scss">
@@ -22,6 +27,7 @@
 			grid-column: 1/-1;
 			grid-row: 2 / span 1;
 			margin-inline: auto;
+			padding-top: $pd-mb-invoices;
 		}
 	}
 	@media screen and (min-width: $sz-tablet) {

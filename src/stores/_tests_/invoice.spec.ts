@@ -56,4 +56,8 @@ describe("invoice store", () => {
 
 		expect(store.filteredInvoice).toEqual(store.invoices);
 	});
+
+	it("should return color for paid status", () => {
+		const { statusColor } = useInvoiceStore();
+	});
 });
