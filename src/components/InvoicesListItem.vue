@@ -1,46 +1,46 @@
 <script lang="ts" setup>
-	import { ref } from "vue";
+	import { computed } from "vue";
 	import IconArrowRight from "./icons/IconArrowRight.vue";
 	import { useInvoiceStore } from "@/stores/invoice";
 	const store = useInvoiceStore();
 	const props = defineProps({
 		item: Object,
 	});
-	const colr = ref("");
-	const bg = ref("");
-
-	switch (props.item?.status) {
-		case "paid":
-			colr.value = store.statusColor.paid.text;
-			bg.value = store.statusColor.paid.bg;
-			console.log("we are here", colr.value);
-			break;
-		case "pending":
-			colr.value = store.statusColor.pending.text;
-			bg.value = store.statusColor.pending.bg;
-			break;
-		case "draft":
-			colr.value = store.statusColor.draft.text;
-			bg.value = store.statusColor.draft.bg;
-			console.log("we are here", colr.value);
-			break;
+	let statusColors = computed(() => {
+		return {
+			"--text-color": colr,
+			"--bg-color": bg,
+		};
+	});
+	let colr = "";
+	let bg = "";
+	if (props.item) {
+		switch (props.item.status) {
+			case "paid":
+				colr = "hsl(160, 67%, 52%)";
+				bg = "hsla(160, 67%, 52%, 0.057)";
+				break;
+			case "pending":
+				colr = "hsl(34, 100%, 50%)";
+				bg = "hsla(34, 100%, 50%, 0.057)";
+				break;
+		}
 	}
 </script>
 <template>
-	<div class="item grid-flow p-2">
-		<h4 class="id">#{{ item?.id }}</h4>
+	<div class="item grid-flow p-2" @click="store.viewById(item?.id)">
+		<h4 class="id" :value="item?.id">#{{ item?.id }}</h4>
 		<p class="due"><span>Due </span> {{ item?.paymentDue }}</p>
 
 		<p class="client-name">{{ item?.clientName }}</p>
 		<h3 class="total">£{{ item?.total }}</h3>
 
-		<h4 class="status" :style="styleObject">⏺ {{ item?.status }}</h4>
-		<i class="right-arrow">
-			<IconArrowRight />
-		</i>
+		<h4 class="status" :style="statusColors">● {{ item?.status }}</h4>
+
+		<IconArrowRight class="right-arrow" />
 	</div>
 </template>
-<style lang="scss">
+<style lang="scss" scoped>
 	.grid-flow {
 		display: grid;
 		grid-template-columns: 1fr 1fr;
@@ -76,6 +76,7 @@
 		box-shadow: $shadow-invoice;
 		border-radius: $radius-invoice;
 		margin-bottom: 16px;
+
 		span {
 			color: var(--color-text);
 		}
@@ -87,8 +88,12 @@
 			color: var(--color-text-soft);
 		}
 		.status {
-			background-color: v-bind("bg");
-			color: v-bind(("colr"));
+			--text-color: var(--color-draft);
+			--bg-color: var(--color-draft-bg);
+
+			background: var(--bg-color);
+
+			color: var(--text-color);
 			padding: 1rem;
 			border-radius: $radius-invoice;
 			padding-inline: 1.5rem;
@@ -102,14 +107,14 @@
 	}
 	@media screen and (min-width: $sz-tablet) {
 		.grid-flow {
-			grid-template-columns: repeat(6, 1fr);
+			grid-template-columns: 1fr 1fr 1fr 1fr 1fr auto;
 			// grid-template-rows: 1fr;
 			gap: 1rem;
 			align-items: center;
 			grid-template-rows: 1fr;
-
+			width: auto;
 			.right-arrow {
-				display: block;
+				display: inline-block;
 			}
 
 			.due,
