@@ -42,7 +42,6 @@ describe("invoice store", () => {
 		const store = useInvoiceStore();
 		store.setStatus("draft");
 		store.setStatus("paid");
-		// console.log("status array", store.filteredInvoice);
 
 		expect(store.filteredInvoice.length).toBe(3);
 	});
@@ -52,12 +51,16 @@ describe("invoice store", () => {
 		store.setStatus("draft");
 		store.setStatus("paid");
 		store.setStatus("pending");
-		// console.log("status array", store.filteredInvoice);
 
 		expect(store.filteredInvoice).toEqual(store.invoices);
 	});
 
-	it("should return color for paid status", () => {
-		const { statusColor } = useInvoiceStore();
+	it("should return correct color for paid status", () => {
+		// const { statusColor } = useInvoiceStore();
+	});
+	it("should show id of clicked item", () => {
+		const store = useInvoiceStore();
+		store.viewById("XM9141");
+		expect(store.getInvoice?.clientName).toEqual("Alex Grim");
 	});
 });
