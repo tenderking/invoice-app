@@ -11,8 +11,10 @@
 
 	--neutral-10: hsl(228, 28%, 7%);
 	--neutral-40: hsla(231, 20%, 27%, 1);
+	--neutral-405: hsla(231, 20%, 27%, 0.057);
 	--neutral-60: hsl(231, 20%, 61%);
 	--neutral-80: hsl(231, 72%, 93%);
+	--neutral-805: hsla(231, 72%, 93%, 0.057);
 	--neutral-90: hsl(240, 20%, 98%);
 	--neutral-100: white;
 
@@ -35,7 +37,10 @@
 		--color-text-soft: var(--secondary-60);
 		--color-btn-light-bg: var(--secondary-90);
 		--color-btn-light-text: var(--secondary-60);
+		--color-btn-hover-bg: var(--secondary-60);
+		// --color-btn-hover-text: var(--secondary-60);
 		--color-draft: var(--neutral-40);
+		--color-draft-bg: var(--neutral-405);
 	}
 }
 @media (prefers-color-scheme: dark) {
@@ -48,8 +53,11 @@
 		--color-text: var(--neutral-100);
 		--color-text-soft: var(--neutral-80);
 		--color-btn-light-bg: var(--secondary-20);
-		--color-btn-light-text: var(--neutral-80);
+		--color-btn-light-text: var(--secondary-60);
+		--color-btn-hover-bg: var(--neutral-100);
+		// --color-btn-hover-text: var(--secondary-60);
 		--color-draft: var(--neutral-80);
+		--color-draft-bg: var(--neutral-805);
 	}
 }
 .dark {
