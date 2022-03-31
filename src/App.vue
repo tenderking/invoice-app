@@ -1,16 +1,15 @@
 <script setup lang="ts">
 	import TheNavBar from "./components/TheNavBar.vue";
-	import InvoiceList from "./components/InvoiceList.vue";
-	import ViewInvoice from "./components/ViewInvoice.vue";
-	import ViewInvoiceNav from "./components/ViewInvoiceNav.vue";
+	import { useInvoiceStore } from "./stores/invoice";
+	const store = useInvoiceStore();
 </script>
 
 <template>
 	<header><TheNavBar /></header>
 	<main>
-		<InvoiceList />
-		<!-- <ViewInvoiceNav /> -->
-		<!-- <ViewInvoice /> -->
+		<!-- <keep-alive> -->
+		<component :is="store.current"></component>
+		<!-- </keep-alive> -->
 	</main>
 </template>
 <style lang="scss">
