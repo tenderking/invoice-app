@@ -8,7 +8,8 @@
 	.button {
 		--button-color: var(--color-btn-light-text);
 		--button-bg: var(--color-btn-light-bg);
-		--hover-bg: var(--color-btn-light-text);
-		--hover-color: var(--color-btn-light-bg);
+		--hover-bg: var(--color-btn-hover-bg);
+		--hover-color: var(--secondary-60);
+		padding-block: 1rem;
 	}
 </style>

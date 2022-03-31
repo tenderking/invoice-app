@@ -1,9 +1,11 @@
 <template>
 	<button class="button br-24">
-		<slot> </slot>
+		<h4>
+			<slot> </slot>
+		</h4>
 	</button>
 </template>
-<style lang="scss">
+<style lang="scss" scoped>
 	.button {
 		font-family: inherit;
 		border: 0;

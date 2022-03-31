@@ -28,7 +28,7 @@
 		--button-color: var(--neutral-100);
 		--button-bg: var(--primary-60);
 		--hover-bg: var(--primary-70);
-
+		padding-inline: 1rem;
 		.new-button {
 			display: flex;
 			align-items: center;
