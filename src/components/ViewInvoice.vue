@@ -1,4 +1,16 @@
+<script lang="ts" setup>
+	import { useInvoiceStore } from "@/stores/invoice";
+	import { computed } from "vue";
+	import ViewInvoiceNav from "./ViewInvoiceNav.vue";
+	import ButtonBack from "./buttons/ButtonBack.vue";
+
+	const store = useInvoiceStore();
+	//invoice must be in a computed to register changes coming from the store.
+	const invoice = computed(() => store.getInvoice);
+</script>
 <template>
+	<ButtonBack />
+	<ViewInvoiceNav />
 	<div class="container wrapper-1 p-2 br-8 shadow-invoice">
 		<div class="company flex-flow">
 			<div class="invoice-id">
@@ -58,13 +70,7 @@
 		</div>
 	</div>
 </template>
-<script lang="ts" setup>
-	import { useInvoiceStore } from "@/stores/invoice";
-
-	const { filteredInvoice } = useInvoiceStore();
-	const invoice = filteredInvoice[1];
-</script>
-<style lang="scss">
+<style lang="scss" scoped>
 	.container {
 		background-color: var(--color-background-mute);
 		p {
