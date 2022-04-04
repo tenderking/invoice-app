@@ -72,7 +72,10 @@ p {
 	padding: 2rem;
 }
 .p-1 {
-	padding: 2rem;
+	padding: 1rem;
+}
+.p-16 {
+	padding: 1.3333rem;
 }
 .flex-flow {
 	display: flex;
@@ -115,5 +118,8 @@ p {
 }
 .soft-color {
 	color: var(--color-text-soft);
+}
+.primary {
+	color: var(--primary-60);
 }
 /* execption */

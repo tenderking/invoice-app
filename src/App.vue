@@ -1,6 +1,7 @@
 <script setup lang="ts">
 	import TheNavBar from "./components/TheNavBar.vue";
 	import { useInvoiceStore } from "./stores/invoice";
+	import TheForm from "./components/forms/TheForm.vue";
 	const store = useInvoiceStore();
 </script>
 
@@ -8,6 +9,9 @@
 	<header><TheNavBar /></header>
 	<main>
 		<!-- <keep-alive> -->
+
+		<TheForm />
+
 		<component :is="store.current"></component>
 		<!-- </keep-alive> -->
 	</main>
@@ -16,8 +20,8 @@
 	#app {
 		height: 100vh;
 		display: grid;
-		grid-template-columns: max-content auto;
-		grid-template-rows: max-content auto;
+		grid-template-columns: 1fr auto;
+		grid-template-rows: 1fr auto;
 		header {
 			grid-column: 1/-1;
 			grid-row: 1 / span 1;
@@ -31,6 +35,7 @@
 	}
 	@media screen and (min-width: $sz-tablet) {
 		#app {
+			grid-template-columns: auto 1fr;
 			header {
 				grid-column: 1 / span 1;
 				grid-row: 1 / -1;
