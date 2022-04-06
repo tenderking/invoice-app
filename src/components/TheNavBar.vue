@@ -2,8 +2,11 @@
 	<nav>
 		<IconLogoBg />
 		<div class="nav">
-			<div class="icon">
-				<IconTheme />
+			<div class="icon" @click="changeTheme">
+				<!-- use v-model to creat a two way binding -->
+				<!-- we send isMoon as a prop -->
+				<!-- we update value using emit event -->
+				<IconTheme v-model:isMoon="isDark" />
 			</div>
 			<img
 				src="@/assets/image-avatar.jpg"
@@ -16,6 +19,39 @@
 <script setup lang="ts">
 	import IconLogoBg from "@/components/icons/IconLogoBg.vue";
 	import IconTheme from "@/components/icons/IconTheme.vue";
+	import { computed, ref, watch } from "vue";
+	const body = document.body;
+	// do an if check
+	// body.classList.add("")
+	const isDark = ref(window.matchMedia("(prefers-color-scheme: dark)").matches);
+	const changeTheme = () => {
+		if (
+			window.matchMedia("(prefers-color-scheme: dark)").matches
+			//prefers||or dark class||prefers dark and light class
+		) {
+			if (body.classList.contains("light")) {
+				document.body.classList.remove("light");
+				body.classList.add("dark");
+				// lightTheme.value = false;
+				console.log("prefers dark and is light class");
+			} else {
+				body.classList.remove("dark");
+				body.classList.add("light");
+			}
+
+			console.log("prefers dark");
+		} else {
+			if (body.classList.contains("dark")) {
+				document.body.classList.remove("dark");
+				body.classList.add("light");
+				console.log("prefers light and is dark class");
+			} else {
+				body.classList.remove("light");
+				body.classList.add("dark");
+			}
+		}
+	};
+	// watch(theme);
 </script>
 
 <style lang="scss" scoped>

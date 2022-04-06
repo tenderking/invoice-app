@@ -30,9 +30,14 @@
 </template>
 
 <script lang="ts" setup>
-	import { ref } from "vue";
-	const isMoon = ref(true);
-	const toggleIcon = () => (isMoon.value = !isMoon.value);
+	const toggleIcon = () => emits("update:isMoon", !props.isMoon);
+	const props = defineProps({
+		isMoon: {
+			type: Boolean,
+			required: true,
+		},
+	});
+	const emits = defineEmits(["update:isMoon"]);
 </script>
 
 <style></style>
