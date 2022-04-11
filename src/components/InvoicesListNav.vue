@@ -12,7 +12,7 @@
 	<div class="nav p-2">
 		<div>
 			<h2>Invoices</h2>
-			<p>Invoices</p>
+			<p>{{ store.filteredInvoice.length }} Invoices</p>
 		</div>
 
 		<div class="filter-dd" @click="showFilters()">
