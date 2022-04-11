@@ -33,7 +33,7 @@
 		<p class="due"><span>Due </span> {{ item?.paymentDue }}</p>
 
 		<p class="client-name">{{ item?.clientName }}</p>
-		<h3 class="total">£{{ item?.total }}</h3>
+		<h3 class="total">£{{ item?.total.toFixed(2) }}</h3>
 
 		<h4 class="status" :style="statusColors">● {{ item?.status }}</h4>
 
