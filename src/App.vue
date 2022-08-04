@@ -10,7 +10,7 @@
 	<main>
 		<!-- <keep-alive> -->
 
-		<TheForm />
+		<TheForm v-show="store.formOpen === true" />
 
 		<component :is="store.current"></component>
 		<!-- </keep-alive> -->
@@ -43,6 +43,8 @@
 			main {
 				grid-column: 2/-1;
 				grid-row: 1/ -1;
+				position: relative;
+				width: 100%;
 			}
 		}
 	}

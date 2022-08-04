@@ -2,6 +2,8 @@
 	import ButtonEdit from "./buttons/ButtonEdit.vue";
 	import ButtonDelete from "./buttons/ButtonDelete.vue";
 	import ButtonMarkAsPaid from "./buttons/ButtonMarkAsPaid.vue";
+	import { useInvoiceStore } from "@/stores/invoice";
+	const store = useInvoiceStore();
 </script>
 <template>
 	<div class="main wrapper-1 p-1 br-8 flex-flow">
@@ -10,7 +12,7 @@
 			<h4>● Pending</h4>
 		</div>
 		<div class="cta-buttons flex-flow">
-			<ButtonEdit />
+			<ButtonEdit @click="store.openForm()" />
 			<ButtonDelete />
 			<ButtonMarkAsPaid />
 		</div>

@@ -59,7 +59,7 @@
 			</div>
 		</div>
 
-		<ButtonNewInvoice />
+		<ButtonNewInvoice @click="store.openForm()" />
 	</div>
 </template>
 <style lang="scss" scoped>

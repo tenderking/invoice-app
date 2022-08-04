@@ -11,23 +11,8 @@ export const useInvoiceStore = defineStore({
 			status: [] as string[],
 			invoiceId: "RG0314",
 			viewInvoice: false,
+			formOpen: false,
 			component: InvoiceList,
-			statusColor: {
-				paid: {
-					// text: "hsl(160, 67%, 52%)",
-					text: "--success-60",
-					bg: "hsla(160, 67%, 52%, 0.057)",
-				},
-				pending: {
-					text: "--warning-60",
-					bg: "hsla(34, 100%, 50%, 0.057)",
-				},
-				draft: {
-					// text: " hsl(231, 20%, 27%)",
-					text: "--color-draft",
-					bg: "hsla(231, 20%, 27%, 0.057)",
-				},
-			},
 		};
 	},
 
@@ -46,6 +31,12 @@ export const useInvoiceStore = defineStore({
 		viewById(val: string) {
 			this.invoiceId = val;
 			this.viewInvoice = true;
+		},
+
+		openForm() {
+			// const formModal = document.querySelector<HTMLElement>("form-modal")!;
+			// formModal.style.display = "block";
+			this.formOpen = true;
 		},
 	},
 
