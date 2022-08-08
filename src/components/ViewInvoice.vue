@@ -10,7 +10,7 @@
 </script>
 <template>
 	<ButtonBack />
-	<ViewInvoiceNav />
+	<ViewInvoiceNav :invoiceId="invoice.id" />
 	<div class="container wrapper-1 p-2 br-8 shadow-invoice">
 		<div class="company flex-flow">
 			<div class="invoice-id">

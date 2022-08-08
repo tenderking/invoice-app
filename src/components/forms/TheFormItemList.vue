@@ -12,15 +12,15 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr v-for="item in 4">
+				<tr v-for="(item, index) in modelValue" :key="index">
 					<td>
-						<TheFormBaseInput id="itemName" modelValue="" type="text" />
+						<TheFormBaseInput id="itemName" v-model="item.name" type="text" />
 					</td>
 					<td>
 						<TheFormBaseInput
 							class="number-input"
 							id="qty"
-							modelValue="0"
+							v-model="item.quantity"
 							type="number"
 						/>
 					</td>
@@ -28,16 +28,16 @@
 						<TheFormBaseInput
 							class="number-input"
 							id="price"
-							modelValue="0"
+							v-model="item.price"
 							type="number"
 						/>
 					</td>
-					<td>{{ 0 }}</td>
+					<td>{{ item.total }}</td>
 					<td><IconDelete /></td>
 				</tr>
 			</tbody>
 		</table>
-		<ButtonAdd />
+		<ButtonAdd @click.prevent="addItem" />
 	</div>
 </template>
 
@@ -45,6 +45,21 @@
 	import TheFormBaseInput from "./TheFormBaseInput.vue";
 	import IconDelete from "../icons/IconDelete.vue";
 	import ButtonAdd from "../buttons/ButtonAdd.vue";
+	import type { Item } from "@/stores/model";
+	import { ref, type PropType } from "vue";
+	defineProps({
+		modelValue: {
+			type: Array as PropType<Array<Item>>,
+		},
+	});
+	const newItem = {
+		name: "",
+		quantity: 0,
+		price: 0,
+		total: 0,
+	};
+	let itemList = ref([newItem]);
+	const addItem = () => itemList.value.push(newItem);
 </script>
 <style lang="scss">
 	table {

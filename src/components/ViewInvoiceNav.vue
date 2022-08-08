@@ -4,6 +4,12 @@
 	import ButtonMarkAsPaid from "./buttons/ButtonMarkAsPaid.vue";
 	import { useInvoiceStore } from "@/stores/invoice";
 	const store = useInvoiceStore();
+	defineProps({
+		invoiceId: {
+			type: String,
+			required: true,
+		},
+	});
 </script>
 <template>
 	<div class="main wrapper-1 p-1 br-8 flex-flow">
@@ -12,7 +18,7 @@
 			<h4>● Pending</h4>
 		</div>
 		<div class="cta-buttons flex-flow">
-			<ButtonEdit @click="store.openForm()" />
+			<ButtonEdit @click="store.editForm(invoiceId)" />
 			<ButtonDelete />
 			<ButtonMarkAsPaid />
 		</div>

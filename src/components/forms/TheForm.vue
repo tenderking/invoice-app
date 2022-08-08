@@ -5,7 +5,8 @@
 	import TheFormItemList from "./TheFormItemList.vue";
 	import { useInvoiceStore } from "@/stores/invoice";
 
-	const store = useInvoiceStore;
+	const store = useInvoiceStore();
+	// const payload = store.getFormPayload;
 </script>
 <template>
 	<div class="form-modal">
@@ -14,30 +15,76 @@
 				<!-- TODO:  {{ title }} -->
 				New Invoice
 			</h2>
-			<form action="Get">
+			<form action="Get" @submit.prevent="">
 				<h4 class="primary pb-1">Bill From</h4>
-				<TheFormBaseInput id="adress" label="Street Adress" />
+				<TheFormBaseInput
+					id="adress"
+					label="Street Adress"
+					v-model:modelValue="store.getFormPayload.senderAddress.street"
+				/>
 				<div class="form-adress pb-1">
-					<TheFormBaseInput id="city" label="City" />
-					<TheFormBaseInput id="postCode" label="Post Code" />
-					<TheFormBaseInput id="country" label="Country" />
+					<TheFormBaseInput
+						id="city"
+						label="City"
+						v-model:modelValue="store.getFormPayload.senderAddress.city"
+					/>
+					<TheFormBaseInput
+						id="postCode"
+						label="Post Code"
+						v-model:modelValue="store.getFormPayload.senderAddress.postCode"
+					/>
+					<TheFormBaseInput
+						id="country"
+						label="Country"
+						v-model:modelValue="store.getFormPayload.senderAddress.country"
+					/>
 				</div>
 				<h4 class="primary pb-1">Bill To</h4>
-				<TheFormBaseInput id="name" label="Client's Name" />
-				<TheFormBaseInput id="email" type="email" label="Client's Email" />
-				<TheFormBaseInput id="adress" label="Street Adress" />
+				<TheFormBaseInput
+					id="name"
+					label="Client's Name"
+					v-model:modelValue="store.getFormPayload.clientAddress.street"
+				/>
+				<TheFormBaseInput
+					id="email"
+					type="email"
+					label="Client's Email"
+					v-model:modelValue="store.getFormPayload.clientEmail"
+				/>
+				<TheFormBaseInput
+					id="adress"
+					label="Street Adress"
+					v-model:modelValue="store.getFormPayload.clientAddress.street"
+				/>
 				<div class="form-adress">
-					<TheFormBaseInput id="city" label="City" />
-					<TheFormBaseInput id="postCode" label="Post Code" />
-					<TheFormBaseInput id="country" label="Country" />
+					<TheFormBaseInput
+						id="city"
+						label="City"
+						v-model:modelValue="store.getFormPayload.clientAddress.city"
+					/>
+					<TheFormBaseInput
+						id="postCode"
+						label="Post Code"
+						v-model:modelValue="store.getFormPayload.clientAddress.postCode"
+					/>
+					<TheFormBaseInput
+						id="country"
+						label="Country"
+						v-model:modelValue="store.getFormPayload.clientAddress.country"
+					/>
 				</div>
 				<div class="form-adress">
 					<!-- TODO: -->
 					<TheFormDatePicker />
 					<TheFormSelect />
 				</div>
-				<TheFormBaseInput id="description" label="Project Description" />
-				<TheFormItemList />
+				<TheFormBaseInput
+					id="description"
+					label="Project Description"
+					v-model:modelValue="store.getFormPayload.description"
+				/>
+				<TheFormItemList v-model:modelValue="store.getFormPayload.items" />
+				<component :is="store.isEditMode"></component>
 			</form>
 		</div>
 	</div>
