@@ -26,9 +26,14 @@
 				break;
 		}
 	}
+	const invoiceAction = () => {
+		props.item?.status === "draft"
+			? store.editForm(props.item?.id)
+			: store.viewById(props.item?.id);
+	};
 </script>
 <template>
-	<div class="item grid-flow p-2" @click="store.viewById(item?.id)">
+	<div class="item grid-flow p-2" @click="invoiceAction()">
 		<h4 class="id" :value="item?.id">#{{ item?.id }}</h4>
 		<p class="due"><span>Due </span> {{ item?.paymentDue }}</p>
 

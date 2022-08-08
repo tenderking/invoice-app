@@ -3,11 +3,9 @@
 		<div class="wrapper-1">
 			<InvoicesListNav />
 		</div>
-		<div class="wrapper-1 wrapper-2">
-			<template v-for="item in store.filteredInvoice">
-				<InvoicesListItem :item="item" />
-			</template>
-		</div>
+		<template v-for="item in store.filteredInvoice" :key="item">
+			<InvoicesListItem :item="item" />
+		</template>
 	</div>
 </template>
 <script lang="ts" setup>

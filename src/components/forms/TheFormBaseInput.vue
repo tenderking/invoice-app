@@ -9,8 +9,9 @@
 			:id="id"
 			:type="type"
 			:value="modelValue"
-			@input="updateInput"
+			@input="$emit('update:modelValue', ($event.target as HTMLInputElement).value)"
 			class="form-input br-4 p-16"
+			required
 		/>
 	</div>
 </template>
@@ -33,9 +34,7 @@
 			default: "text",
 		},
 	});
-	const updateInput = (event: Event) => {
-		// update:myNewValue must match prop myNewValue
-	};
+	defineEmits(["update:modelValue"]);
 </script>
 <style lang="scss" scoped>
 	.form {
