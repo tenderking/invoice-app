@@ -3,10 +3,21 @@
 	import TheFormDatePicker from "./TheFormDatePicker.vue";
 	import TheFormSelect from "./TheFormSelect.vue";
 	import TheFormItemList from "./TheFormItemList.vue";
-	import { useInvoiceStore } from "@/stores/invoice";
-
+	import { useInvoiceStore } from "@/stores/invoiceStore";
+	import TheFormNewInvoiceButtonsVue from "./TheFormNewInvoiceButtons.vue";
+	import TheFormEditInvoiceButtonsVue from "./TheFormEditInvoiceButtons.vue";
+	import { shallowRef, computed } from "vue";
 	const store = useInvoiceStore();
-	// const payload = store.getFormPayload;
+	// const payload = store.payload;
+	const formButtons = computed(() => {
+		const editFormButtons = shallowRef(TheFormEditInvoiceButtonsVue);
+		const newFormButtons = shallowRef(TheFormNewInvoiceButtonsVue);
+		if (store.isEditMode) {
+			return editFormButtons.value;
+		} else {
+			return newFormButtons.value;
+		}
+	});
 </script>
 <template>
 	<div class="form-modal">
@@ -20,57 +31,57 @@
 				<TheFormBaseInput
 					id="adress"
 					label="Street Adress"
-					v-model:modelValue="store.getFormPayload.senderAddress.street"
+					v-model:modelValue="store.payload.senderAddress.street"
 				/>
 				<div class="form-adress pb-1">
 					<TheFormBaseInput
 						id="city"
 						label="City"
-						v-model:modelValue="store.getFormPayload.senderAddress.city"
+						v-model:modelValue="store.payload.senderAddress.city"
 					/>
 					<TheFormBaseInput
 						id="postCode"
 						label="Post Code"
-						v-model:modelValue="store.getFormPayload.senderAddress.postCode"
+						v-model:modelValue="store.payload.senderAddress.postCode"
 					/>
 					<TheFormBaseInput
 						id="country"
 						label="Country"
-						v-model:modelValue="store.getFormPayload.senderAddress.country"
+						v-model:modelValue="store.payload.senderAddress.country"
 					/>
 				</div>
 				<h4 class="primary pb-1">Bill To</h4>
 				<TheFormBaseInput
 					id="name"
 					label="Client's Name"
-					v-model:modelValue="store.getFormPayload.clientAddress.street"
+					v-model:modelValue="store.payload.clientName"
 				/>
 				<TheFormBaseInput
 					id="email"
 					type="email"
 					label="Client's Email"
-					v-model:modelValue="store.getFormPayload.clientEmail"
+					v-model:modelValue="store.payload.clientEmail"
 				/>
 				<TheFormBaseInput
 					id="adress"
 					label="Street Adress"
-					v-model:modelValue="store.getFormPayload.clientAddress.street"
+					v-model:modelValue="store.payload.clientAddress.street"
 				/>
 				<div class="form-adress">
 					<TheFormBaseInput
 						id="city"
 						label="City"
-						v-model:modelValue="store.getFormPayload.clientAddress.city"
+						v-model:modelValue="store.payload.clientAddress.city"
 					/>
 					<TheFormBaseInput
 						id="postCode"
 						label="Post Code"
-						v-model:modelValue="store.getFormPayload.clientAddress.postCode"
+						v-model:modelValue="store.payload.clientAddress.postCode"
 					/>
 					<TheFormBaseInput
 						id="country"
 						label="Country"
-						v-model:modelValue="store.getFormPayload.clientAddress.country"
+						v-model:modelValue="store.payload.clientAddress.country"
 					/>
 				</div>
 				<div class="form-adress">
@@ -81,10 +92,10 @@
 				<TheFormBaseInput
 					id="description"
 					label="Project Description"
-					v-model:modelValue="store.getFormPayload.description"
+					v-model:modelValue="store.payload.description"
 				/>
-				<TheFormItemList v-model:modelValue="store.getFormPayload.items" />
-				<component :is="store.isEditMode"></component>
+				<TheFormItemList v-model:modelValue="store.payload.items" />
+				<component :is="formButtons"></component>
 			</form>
 		</div>
 	</div>
@@ -104,7 +115,6 @@
 		z-index: 999;
 
 		.form-container {
-			/* TODO: position: absolute;*/
 			position: absolute;
 			background-color: var(--color-background-mute);
 			inset: 0 auto auto 0;
@@ -121,6 +131,7 @@
 				gap: 2rem;
 				max-width: 100%;
 				margin: auto;
+
 				> * {
 					flex: 1 1 auto;
 				}

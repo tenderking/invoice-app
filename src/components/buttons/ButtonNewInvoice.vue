@@ -21,14 +21,13 @@
 </template>
 <script lang="ts" setup>
 	import ButtonBase from "./ButtonBase.vue";
-	import IconPlus from "../icons/IconPlus.vue";
 </script>
 <style lang="scss" scoped>
 	.button {
 		--button-color: var(--neutral-100);
 		--button-bg: var(--primary-60);
 		--hover-bg: var(--primary-70);
-		padding-inline: 1rem;
+		// padding-inline: 1rem;
 		.new-button {
 			display: flex;
 			align-items: center;

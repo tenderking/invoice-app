@@ -2,7 +2,8 @@
 	import ButtonEdit from "./buttons/ButtonEdit.vue";
 	import ButtonDelete from "./buttons/ButtonDelete.vue";
 	import ButtonMarkAsPaid from "./buttons/ButtonMarkAsPaid.vue";
-	import { useInvoiceStore } from "@/stores/invoice";
+	import { useInvoiceStore } from "@/stores/invoiceStore";
+	import { computed } from "vue";
 	const store = useInvoiceStore();
 	defineProps({
 		invoiceId: {
@@ -10,17 +11,31 @@
 			required: true,
 		},
 	});
+
+	const getStatus = computed(() => store.getSelectedInvoice.status);
+	const statusColors = computed(() => {
+		let textColor = "";
+		let bgColor = "";
+		if (getStatus.value === "paid") {
+			textColor = "hsl(160, 67%, 52%)";
+			bgColor = "hsla(160, 67%, 52%, 0.057)";
+		}
+		return {
+			"--text-color": textColor,
+			"--bg-color": bgColor,
+		};
+	});
 </script>
 <template>
 	<div class="main wrapper-1 p-1 br-8 flex-flow">
-		<div class="status flex-flow">
+		<div :style="statusColors" class="status flex-flow">
 			<p class="status-text">Status</p>
-			<h4>● Pending</h4>
+			<h4>{{ getStatus }}</h4>
 		</div>
 		<div class="cta-buttons flex-flow">
 			<ButtonEdit @click="store.editForm(invoiceId)" />
 			<ButtonDelete />
-			<ButtonMarkAsPaid />
+			<ButtonMarkAsPaid @click="store.setStatusAsPaid(invoiceId)" />
 		</div>
 	</div>
 </template>
@@ -30,14 +45,17 @@
 		background-color: var(--color-background-mute);
 
 		.status {
+			--text-color: var(--warning-60);
+			--bg-color: var(--warning-80);
+
 			width: 100%;
 			&-text {
 				color: var(--color-text-soft);
 			}
 		}
 		h4 {
-			background-color: var(--warning-80);
-			color: var(--warning-60);
+			background-color: var(--bg-color);
+			color: var(--text-color);
 
 			border-radius: $radius-invoice;
 			padding: 1rem;
@@ -49,6 +67,7 @@
 			left: 0;
 			background-color: var(--color-background-mute);
 			width: 100%;
+			padding: 1rem;
 		}
 	}
 	@media screen and (min-width: $sz-tablet) {
@@ -61,6 +80,7 @@
 				width: auto;
 
 				gap: 1em;
+				padding: 0;
 			}
 		}
 	}

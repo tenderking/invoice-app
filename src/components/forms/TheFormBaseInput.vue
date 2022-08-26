@@ -9,9 +9,10 @@
 			:id="id"
 			:type="type"
 			:value="modelValue"
-			@input="$emit('update:modelValue', ($event.target as HTMLInputElement).value)"
+			@input="
+				$emit('update:modelValue', ($event.target as HTMLInputElement).value)
+			"
 			class="form-input br-4 p-16"
-			required
 		/>
 	</div>
 </template>

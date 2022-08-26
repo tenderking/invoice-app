@@ -9,6 +9,7 @@
 		--button-color: var(--neutral-100);
 		--button-bg: var(--primary-60);
 		--hover-bg: var(--primary-70);
+		--hover-color: var(--neutral-100);
 		padding-block: 1rem;
 	}
 </style>

@@ -1,31 +1,37 @@
 <script lang="ts" setup>
 	import { computed } from "vue";
 	import IconArrowRight from "./icons/IconArrowRight.vue";
-	import { useInvoiceStore } from "@/stores/invoice";
+	import { useInvoiceStore } from "@/stores/invoiceStore";
+	import type { MyObj } from "@/utils/model";
+	import type { PropType } from "vue";
 	const store = useInvoiceStore();
 	const props = defineProps({
-		item: Object,
+		item: {
+			type: Object as PropType<MyObj>,
+			required: true,
+		},
 	});
-	let statusColors = computed(() => {
-		return {
-			"--text-color": colr,
-			"--bg-color": bg,
-		};
-	});
-	let colr = "";
-	let bg = "";
-	if (props.item) {
+	const statusColors = computed(() => {
+		let textColor = "";
+		let bgColor = "";
+
 		switch (props.item.status) {
 			case "paid":
-				colr = "hsl(160, 67%, 52%)";
-				bg = "hsla(160, 67%, 52%, 0.057)";
+				textColor = "hsl(160, 67%, 52%)";
+				bgColor = "hsla(160, 67%, 52%, 0.057)";
 				break;
 			case "pending":
-				colr = "hsl(34, 100%, 50%)";
-				bg = "hsla(34, 100%, 50%, 0.057)";
+				textColor = "hsl(34, 100%, 50%)";
+				bgColor = "hsla(34, 100%, 50%, 0.057)";
 				break;
 		}
-	}
+
+		return {
+			"--text-color": textColor,
+			"--bg-color": bgColor,
+		};
+	});
+
 	const invoiceAction = () => {
 		props.item?.status === "draft"
 			? store.editForm(props.item?.id)
@@ -34,13 +40,13 @@
 </script>
 <template>
 	<div class="item grid-flow p-2" @click="invoiceAction()">
-		<h4 class="id" :value="item?.id">#{{ item?.id }}</h4>
-		<p class="due"><span>Due </span> {{ item?.paymentDue }}</p>
+		<h4 class="id" :value="item.id">#{{ item.id }}</h4>
+		<p class="due"><span>Due </span> {{ item.paymentDue }}</p>
 
-		<p class="client-name">{{ item?.clientName }}</p>
-		<h3 class="total">£{{ item?.total.toFixed(2) }}</h3>
+		<p class="client-name">{{ item.clientName }}</p>
+		<h3 class="total">£{{ item.total.toFixed(2) }}</h3>
 
-		<h4 class="status" :style="statusColors">● {{ item?.status }}</h4>
+		<h4 class="status" :style="statusColors">● {{ item.status }}</h4>
 
 		<IconArrowRight class="right-arrow" />
 	</div>
@@ -95,9 +101,7 @@
 		.status {
 			--text-color: var(--color-draft);
 			--bg-color: var(--color-draft-bg);
-
 			background: var(--bg-color);
-
 			color: var(--text-color);
 			padding: 1rem;
 			border-radius: $radius-invoice;

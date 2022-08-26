@@ -1,19 +1,29 @@
 <script setup lang="ts">
 	import TheNavBar from "./components/TheNavBar.vue";
-	import { useInvoiceStore } from "./stores/invoice";
+	import { useInvoiceStore } from "./stores/invoiceStore";
 	import TheForm from "./components/forms/TheForm.vue";
+	import ViewInvoice from "./components/ViewInvoice.vue";
+	import InvoiceList from "./components/InvoiceList.vue";
+
+	import { computed, shallowRef } from "vue";
 	const store = useInvoiceStore();
+	const formButtons = computed(() => {
+		const invoiceList = shallowRef(InvoiceList);
+		const viewInvoice = shallowRef(ViewInvoice);
+
+		if (store.isViewInvoice) {
+			return viewInvoice.value;
+		}
+		return invoiceList.value;
+	});
 </script>
 
 <template>
 	<header><TheNavBar /></header>
 	<main>
-		<!-- <keep-alive> -->
+		<TheForm v-if="store.isShowForm" />
 
-		<TheForm v-show="store.formOpen === true" />
-
-		<component :is="store.current"></component>
-		<!-- </keep-alive> -->
+		<component :is="formButtons"></component>
 	</main>
 </template>
 <style lang="scss">

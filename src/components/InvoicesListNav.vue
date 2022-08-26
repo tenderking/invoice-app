@@ -1,10 +1,11 @@
 <script lang="ts" setup>
-	import { useInvoiceStore } from "@/stores/invoice";
+	import { useInvoiceStore } from "@/stores/invoiceStore";
 	import { ref } from "vue";
 	import ButtonNewInvoice from "./buttons/ButtonNewInvoice.vue";
 	import IconArrowDown from "./icons/IconArrowDown.vue";
-	const filterBox = ref(false);
-	const showFilters = () => (filterBox.value = !filterBox.value);
+	const isShowFilterMOdal = ref(false);
+	const showFilters = () =>
+		(isShowFilterMOdal.value = !isShowFilterMOdal.value);
 
 	const store = useInvoiceStore();
 </script>
@@ -12,14 +13,14 @@
 	<div class="nav p-2">
 		<div>
 			<h2>Invoices</h2>
-			<p>{{ store.filteredInvoice.length }} Invoices</p>
+			<p>{{ store.getInvoices.length }} Invoices</p>
 		</div>
 
 		<div class="filter-dd" @click="showFilters()">
 			<h4>Filter</h4>
 			<i><IconArrowDown /></i>
 		</div>
-		<div class="filter shadow-filter br-8" v-show="filterBox">
+		<div class="filter shadow-filter br-8" v-show="isShowFilterMOdal">
 			<div class="filter-item">
 				<input
 					type="checkbox"

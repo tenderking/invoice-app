@@ -3,13 +3,13 @@
 		<div class="wrapper-1">
 			<InvoicesListNav />
 		</div>
-		<template v-for="item in store.filteredInvoice" :key="item">
+		<template v-for="item in store.getInvoices" :key="item">
 			<InvoicesListItem :item="item" />
 		</template>
 	</div>
 </template>
 <script lang="ts" setup>
-	import { useInvoiceStore } from "@/stores/invoice";
+	import { useInvoiceStore } from "@/stores/invoiceStore";
 	import InvoicesListItem from "./InvoicesListItem.vue";
 	import InvoicesListNav from "./InvoicesListNav.vue";
 

@@ -1,13 +1,17 @@
 <script lang="ts" setup>
 	import ButtonBase from "../buttons/ButtonBase.vue";
-	import { useInvoiceStore } from "@/stores/invoice";
+	import { useInvoiceStore } from "@/stores/invoiceStore";
 	const store = useInvoiceStore();
 </script>
 <template>
 	<div class="form-btns">
-		<ButtonBase class="discard-btn">Discard</ButtonBase>
-		<ButtonBase class="draft-btn"> Save as Draft</ButtonBase>
-		<ButtonBase class="send-btn" @click="store.onSubmit">
+		<ButtonBase class="discard-btn" type="reset" @click="store.discardForm()"
+			>Discard</ButtonBase
+		>
+		<ButtonBase class="draft-btn" @click="store.onSubmitDraft()">
+			Save as Draft</ButtonBase
+		>
+		<ButtonBase class="send-btn" @click="store.onSubmit()">
 			Save & Send</ButtonBase
 		>
 	</div>

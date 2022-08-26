@@ -12,7 +12,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr v-for="(item, index) in modelValue" :key="index">
+				<tr v-for="(item, index) in items" :key="item.name">
 					<td>
 						<TheFormBaseInput id="itemName" v-model="item.name" type="text" />
 					</td>
@@ -22,6 +22,7 @@
 							id="qty"
 							v-model="item.quantity"
 							type="number"
+							step="0.01"
 						/>
 					</td>
 					<td>
@@ -30,14 +31,15 @@
 							id="price"
 							v-model="item.price"
 							type="number"
+							step="0.01"
 						/>
 					</td>
 					<td>{{ item.total }}</td>
-					<td><IconDelete /></td>
+					<td><IconDelete @click="store.deleteItem(index)" /></td>
 				</tr>
 			</tbody>
 		</table>
-		<ButtonAdd @click.prevent="addItem" />
+		<ButtonAdd @click.prevent="store.addItem()" />
 	</div>
 </template>
 
@@ -45,21 +47,19 @@
 	import TheFormBaseInput from "./TheFormBaseInput.vue";
 	import IconDelete from "../icons/IconDelete.vue";
 	import ButtonAdd from "../buttons/ButtonAdd.vue";
-	import type { Item } from "@/stores/model";
-	import { ref, type PropType } from "vue";
-	defineProps({
-		modelValue: {
-			type: Array as PropType<Array<Item>>,
-		},
-	});
-	const newItem = {
-		name: "",
-		quantity: 0,
-		price: 0,
-		total: 0,
-	};
-	let itemList = ref([newItem]);
-	const addItem = () => itemList.value.push(newItem);
+	// import type { Item } from "@/utils/model";
+	// import type { PropType } from "vue";
+	import { useInvoiceStore } from "@/stores/invoiceStore";
+	import { computed } from "vue";
+	const store = useInvoiceStore();
+	const items = computed(() => store.payload.items);
+
+	// defineProps({
+	// 	modelValue: {
+	// 		type: Array as PropType<Array<Item>>,
+	// 		required: true,
+	// 	},
+	// });
 </script>
 <style lang="scss">
 	table {

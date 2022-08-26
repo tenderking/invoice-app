@@ -1,6 +1,6 @@
 import { setActivePinia, createPinia } from "pinia";
 import { describe, it, expect, beforeEach } from "vitest";
-import { useInvoiceStore } from "@/stores/invoice";
+import { useInvoiceStore } from "@/stores/invoiceStore";
 
 describe("invoice store", () => {
 	beforeEach(() => {
@@ -13,8 +13,8 @@ describe("invoice store", () => {
 	});
 
 	it("filter by all", () => {
-		const { filteredInvoice, invoices } = useInvoiceStore();
-		expect(filteredInvoice).toEqual(invoices);
+		const { getInvoices, invoices } = useInvoiceStore();
+		expect(getInvoices).toEqual(invoices);
 	});
 
 	it("should have status of paid", () => {
@@ -35,7 +35,7 @@ describe("invoice store", () => {
 		const store = useInvoiceStore();
 		store.setStatus("paid");
 
-		expect(store.filteredInvoice.length).toBe(2);
+		expect(store.getInvoices.length).toBe(2);
 	});
 
 	it("filter by paid and draft", () => {
@@ -43,7 +43,7 @@ describe("invoice store", () => {
 		store.setStatus("draft");
 		store.setStatus("paid");
 
-		expect(store.filteredInvoice.length).toBe(3);
+		expect(store.getInvoices.length).toBe(3);
 	});
 
 	it("filter by pending,paid and draft", () => {
@@ -52,7 +52,7 @@ describe("invoice store", () => {
 		store.setStatus("paid");
 		store.setStatus("pending");
 
-		expect(store.filteredInvoice).toEqual(store.invoices);
+		expect(store.getInvoices).toEqual(store.invoices);
 	});
 
 	it("should return correct color for paid status", () => {

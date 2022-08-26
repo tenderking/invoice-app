@@ -1,10 +1,17 @@
 <script lang="ts" setup>
 	import ButtonBase from "../buttons/ButtonBase.vue";
+	import { useInvoiceStore } from "@/stores/invoiceStore";
+	import ButtonCancel from "../buttons/ButtonCancel.vue";
+	const store = useInvoiceStore();
 </script>
 <template>
 	<div class="form-btns">
-		<ButtonBase class="cancel-btn">Cancel</ButtonBase>
-		<ButtonBase class="save-btn"> Save Changes</ButtonBase>
+		<ButtonCancel class="cancel-btn" @click="store.discardForm()"
+			>Cancel</ButtonCancel
+		>
+		<ButtonBase class="save-btn" @click="store.onUpdateForm()">
+			Save Changes</ButtonBase
+		>
 	</div>
 </template>
 <style lang="scss" scoped>
@@ -14,16 +21,13 @@
 		justify-content: flex-end;
 		gap: 1rem;
 		.cancel-btn {
-			--button-color: var(--color-btn-light-text);
-			--button-bg: var(--color-btn-light-bg);
-			--hover-bg: var(--color-btn-hover-bg);
-			--hover-color: var(--neutral-100);
 			padding-block: 1rem;
 		}
 		.save-btn {
 			--button-color: var(--neutral-100);
 			--button-bg: var(--primary-60);
 			--hover-bg: var(--primary-70);
+
 			padding-block: 1rem;
 		}
 	}

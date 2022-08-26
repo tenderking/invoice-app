@@ -11,7 +11,12 @@
 		border: 0;
 		color: var(--button-color);
 		background-color: var(--button-bg);
-		padding: 8px 2rem;
+
+		padding: 0.6rem 1rem;
+		h4 {
+			line-height: 1;
+		}
+
 		&:hover {
 			color: var(--hover-color);
 			background-color: var(--hover-bg);

@@ -1,10 +1,10 @@
 <script lang="ts" setup>
-	import { useInvoiceStore } from "@/stores/invoice";
+	import { useInvoiceStore } from "@/stores/invoiceStore";
 	import IconArrowLeft from "../icons/IconArrowLeft.vue";
 	const store = useInvoiceStore();
 </script>
 <template>
-	<button class="flat-button wrapper-1" @click="store.viewInvoice = false">
+	<button class="flat-button wrapper-1" @click="store.isViewInvoice = false">
 		<div class="flex-flow">
 			<IconArrowLeft />
 			<h4>Go Back</h4>

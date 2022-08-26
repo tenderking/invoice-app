@@ -19,7 +19,7 @@
 <script setup lang="ts">
 	import IconLogoBg from "@/components/icons/IconLogoBg.vue";
 	import IconTheme from "@/components/icons/IconTheme.vue";
-	import { computed, ref, watch } from "vue";
+	import { ref } from "vue";
 	const body = document.body;
 	// do an if check
 	// body.classList.add("")
