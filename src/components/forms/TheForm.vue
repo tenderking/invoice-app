@@ -3,99 +3,66 @@
 	import TheFormDatePicker from "./TheFormDatePicker.vue";
 	import TheFormSelect from "./TheFormSelect.vue";
 	import TheFormItemList from "./TheFormItemList.vue";
-	import { useInvoiceStore } from "@/stores/invoiceStore";
 	import TheFormNewInvoiceButtonsVue from "./TheFormNewInvoiceButtons.vue";
 	import TheFormEditInvoiceButtonsVue from "./TheFormEditInvoiceButtons.vue";
-	import { shallowRef, computed } from "vue";
-	const store = useInvoiceStore();
-	// const payload = store.payload;
-	const formButtons = computed(() => {
-		const editFormButtons = shallowRef(TheFormEditInvoiceButtonsVue);
-		const newFormButtons = shallowRef(TheFormNewInvoiceButtonsVue);
-		if (store.isEditMode) {
-			return editFormButtons.value;
-		} else {
-			return newFormButtons.value;
-		}
+	// import { useInvoiceStore } from "@/stores/invoiceStore";
+	// 	import { shallowRef, computed } from "vue";
+	import { useFormStore } from "@/stores/formStore";	
+	const store = useFormStore();
+	const props = defineProps({
+		mode: {
+			type: Boolean,
+			required: true,
+		},
+		id: {
+			type: String,
+		},
 	});
 </script>
 <template>
 	<div class="form-modal">
 		<div class="form-container">
 			<h2 class="pb-2">
-				<!-- TODO:  {{ title }} -->
-				New Invoice
+				{{ props.mode ? "Edit invoice" : "New Invoice" }}
 			</h2>
 			<form action="Get" @submit.prevent="">
 				<h4 class="primary pb-1">Bill From</h4>
-				<TheFormBaseInput
-					id="adress"
-					label="Street Adress"
-					v-model:modelValue="store.payload.senderAddress.street"
-				/>
+				<TheFormBaseInput id="adress" label="Street Adress" />
+
 				<div class="form-adress pb-1">
-					<TheFormBaseInput
-						id="city"
-						label="City"
-						v-model:modelValue="store.payload.senderAddress.city"
-					/>
-					<TheFormBaseInput
-						id="postCode"
-						label="Post Code"
-						v-model:modelValue="store.payload.senderAddress.postCode"
-					/>
-					<TheFormBaseInput
-						id="country"
-						label="Country"
-						v-model:modelValue="store.payload.senderAddress.country"
-					/>
+					<TheFormBaseInput id="city" label="City" />
+
+					<TheFormBaseInput id="postCode" label="Post Code" />
+
+					<TheFormBaseInput id="country" label="Country" />
 				</div>
 				<h4 class="primary pb-1">Bill To</h4>
-				<TheFormBaseInput
-					id="name"
-					label="Client's Name"
-					v-model:modelValue="store.payload.clientName"
-				/>
-				<TheFormBaseInput
-					id="email"
-					type="email"
-					label="Client's Email"
-					v-model:modelValue="store.payload.clientEmail"
-				/>
-				<TheFormBaseInput
-					id="adress"
-					label="Street Adress"
-					v-model:modelValue="store.payload.clientAddress.street"
-				/>
+				<TheFormBaseInput id="name" label="Client's Name" />
+
+				<TheFormBaseInput id="email" type="email" label="Client's Email" />
+
+				<TheFormBaseInput id="adress" label="Street Adress" />
+
 				<div class="form-adress">
-					<TheFormBaseInput
-						id="city"
-						label="City"
-						v-model:modelValue="store.payload.clientAddress.city"
-					/>
-					<TheFormBaseInput
-						id="postCode"
-						label="Post Code"
-						v-model:modelValue="store.payload.clientAddress.postCode"
-					/>
-					<TheFormBaseInput
-						id="country"
-						label="Country"
-						v-model:modelValue="store.payload.clientAddress.country"
-					/>
+					<TheFormBaseInput id="city" label="City" />
+
+					<TheFormBaseInput id="postCode" label="Post Code" />
+
+					<TheFormBaseInput id="country" label="Country" />
 				</div>
 				<div class="form-adress">
 					<!-- TODO: -->
 					<TheFormDatePicker />
 					<TheFormSelect />
 				</div>
-				<TheFormBaseInput
-					id="description"
-					label="Project Description"
-					v-model:modelValue="store.payload.description"
-				/>
-				<TheFormItemList v-model:modelValue="store.payload.items" />
-				<component :is="formButtons"></component>
+				<TheFormBaseInput id="description" label="Project Description" />
+
+				<TheFormItemList />
+				<component
+					:is="
+						mode ? TheFormEditInvoiceButtonsVue : TheFormNewInvoiceButtonsVue
+					"
+				></component>
 			</form>
 		</div>
 	</div>
@@ -107,19 +74,20 @@
 
 	.form-modal {
 		position: absolute;
+		outline: solid;
+		max-height: 100vh;
+		width: 100vw;
+		background-color: var(--overlay);
+		z-index: 10;
 
-		width: 100%;
-		height: 100vh;
-
-		background-color: rgba(240, 255, 255, 0.496);
-		z-index: 999;
-
+		// inset: -100vh auto 0 auto;
+		padding-top: 3rem;
 		.form-container {
-			position: absolute;
 			background-color: var(--color-background-mute);
-			inset: 0 auto auto 0;
+
 			padding: 4.667rem;
 			border-radius: 0 2rem;
+			z-index: 10;
 
 			height: 100vh;
 			overflow-y: auto;
@@ -135,6 +103,18 @@
 				> * {
 					flex: 1 1 auto;
 				}
+			}
+		}
+	}
+	@media screen and (min-width: $sz-tablet) {
+		.form-modal {
+			left: -15px;
+			padding-top: 0;
+			padding-left: 6rem;
+			.form-container {
+				width: 60vw;
+
+				border-radius: 0 2rem 2rem 0;
 			}
 		}
 	}

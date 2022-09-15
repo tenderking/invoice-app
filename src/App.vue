@@ -1,7 +1,6 @@
 <script setup lang="ts">
 	import TheNavBar from "./components/TheNavBar.vue";
 	import { useInvoiceStore } from "./stores/invoiceStore";
-	import TheForm from "./components/forms/TheForm.vue";
 	import ViewInvoice from "./components/ViewInvoice.vue";
 	import InvoiceList from "./components/InvoiceList.vue";
 
@@ -20,39 +19,32 @@
 
 <template>
 	<header><TheNavBar /></header>
-	<main>
-		<TheForm v-if="store.isShowForm" />
-
+	<div id="modal"></div>
+	<main class="main">
 		<component :is="formButtons"></component>
 	</main>
 </template>
 <style lang="scss">
 	#app {
 		height: 100vh;
-		display: grid;
-		grid-template-columns: 1fr auto;
-		grid-template-rows: 1fr auto;
-		header {
-			grid-column: 1/-1;
-			grid-row: 1 / span 1;
+		// display: grid;
+		// grid-template-columns: 1fr auto;
+		// grid-template-rows: 1fr auto;
+		// position: relative;
+
+		#modal {
+			position: relative;
 		}
 		main {
-			grid-column: 1/-1;
-			grid-row: 2 / span 1;
 			margin-inline: auto;
-			padding-top: $pd-mb-invoices;
+			padding-top: 6rem;
 		}
 	}
 	@media screen and (min-width: $sz-tablet) {
 		#app {
-			grid-template-columns: auto 1fr;
-			header {
-				grid-column: 1 / span 1;
-				grid-row: 1 / -1;
-			}
+			display: flex;
 			main {
-				grid-column: 2/-1;
-				grid-row: 1/ -1;
+				padding-top: 2rem;
 				position: relative;
 				width: 100%;
 			}

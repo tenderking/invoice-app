@@ -21,8 +21,7 @@
 	import IconTheme from "@/components/icons/IconTheme.vue";
 	import { ref } from "vue";
 	const body = document.body;
-	// do an if check
-	// body.classList.add("")
+
 	const isDark = ref(window.matchMedia("(prefers-color-scheme: dark)").matches);
 	const changeTheme = () => {
 		if (
@@ -56,12 +55,15 @@
 
 <style lang="scss" scoped>
 	nav {
-		// position: fixed;
+		position: fixed;
+		z-index: 1000;
 		--color-border: hsl(232, 20%, 36%);
 		display: flex;
 		justify-content: space-between;
+		top: 0;
+		width: 100vw;
 
-		height: 100%;
+		// height: 100vh;
 		background-color: var(--color-background-nav);
 		.nav {
 			display: flex;
@@ -83,6 +85,8 @@
 	}
 	@media screen and (min-width: $sz-tablet) {
 		nav {
+			height: 100vh;
+			max-width: fit-content;
 			flex-direction: column;
 			border-radius: 0 $radius-nav $radius-nav 0;
 			.nav {

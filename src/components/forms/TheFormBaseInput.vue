@@ -43,7 +43,7 @@
 			color: var(--color-text-soft);
 		}
 		&-input {
-			background-color: var(--color-bg);
+			background-color: var(--color-background-soft);
 			border: 2px solid var(--color-form-border);
 			color: var(--color-text);
 			font-weight: bold;

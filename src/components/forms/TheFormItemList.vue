@@ -49,10 +49,10 @@
 	import ButtonAdd from "../buttons/ButtonAdd.vue";
 	// import type { Item } from "@/utils/model";
 	// import type { PropType } from "vue";
-	import { useInvoiceStore } from "@/stores/invoiceStore";
+	import { useFormStore } from "@/stores/formStore";
 	import { computed } from "vue";
-	const store = useInvoiceStore();
-	const items = computed(() => store.payload.items);
+	const store = useFormStore();
+	const items = computed(() => store.newItem);
 
 	// defineProps({
 	// 	modelValue: {

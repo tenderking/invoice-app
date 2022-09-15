@@ -80,12 +80,12 @@
 	.view-invoice__main {
 		padding-bottom: 8rem;
 		.container {
-			background-color: var(--color-background-mute);
+			background-color: var(--color-background-soft);
 			p {
 				color: var(--color-text-soft);
 			}
 			.invoice-details {
-				background-color: var(--color-background-soft);
+				background-color: var(--color-btn-light-bg);
 				padding: $pd-mb-modal;
 				border-radius: 8px 8px 0 0;
 			}

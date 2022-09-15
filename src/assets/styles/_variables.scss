@@ -25,6 +25,7 @@
 
 	--success-80: hsla(160, 67%, 52%, 0.057);
 	--success-60: hsl(160, 67%, 52%);
+	--overlay: rgba(55, 59, 83, 0.536);
 }
 @media (prefers-color-scheme: light) {
 	:root {
@@ -64,8 +65,8 @@
 }
 .dark {
 	--color-background: var(--secondary-10);
-	--color-background-mute: var(--secondary-15);
-	--color-background-soft: var(--secondary-20);
+	--color-background-mute: var(--secondary-10);
+	--color-background-soft: var(--secondary-15);
 	--color-background-misc: var(--neutral-10);
 	--color-background-nav: var(--secondary-15);
 	--color-text: var(--neutral-100);
@@ -81,7 +82,7 @@
 .light {
 	--color-background: var(--neutral-90);
 	--color-background-mute: var(--neutral-100);
-	--color-background-soft: var(--neutral-90);
+	--color-background-soft: var(--neutral-100);
 	--color-background-misc: var(--neutral-40);
 	--color-background-nav: var(--neutral-40);
 	--color-text: var(--neutral-10);

@@ -3,8 +3,12 @@
 	import ButtonDelete from "./buttons/ButtonDelete.vue";
 	import ButtonMarkAsPaid from "./buttons/ButtonMarkAsPaid.vue";
 	import { useInvoiceStore } from "@/stores/invoiceStore";
-	import { computed } from "vue";
+	import TheForm from "./forms/TheForm.vue";
+	import { ref, computed } from "vue";
 	const store = useInvoiceStore();
+
+	const openForm = ref(false);
+	const active = true;
 	defineProps({
 		invoiceId: {
 			type: String,
@@ -33,7 +37,10 @@
 			<h4>{{ getStatus }}</h4>
 		</div>
 		<div class="cta-buttons flex-flow">
-			<ButtonEdit @click="store.editForm(invoiceId)" />
+			<ButtonEdit @click="openForm = true" />
+			<Teleport to="#modal">
+				<TheForm v-if="openForm" :mode="active" :id="invoiceId" />
+			</Teleport>
 			<ButtonDelete />
 			<ButtonMarkAsPaid @click="store.setStatusAsPaid(invoiceId)" />
 		</div>

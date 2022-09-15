@@ -3,11 +3,15 @@
 	import { ref } from "vue";
 	import ButtonNewInvoice from "./buttons/ButtonNewInvoice.vue";
 	import IconArrowDown from "./icons/IconArrowDown.vue";
+	import TheForm from "@/components/forms/TheForm.vue";
 	const isShowFilterMOdal = ref(false);
+
+	const openForm = ref(false);
 	const showFilters = () =>
 		(isShowFilterMOdal.value = !isShowFilterMOdal.value);
 
 	const store = useInvoiceStore();
+	const active = false;
 </script>
 <template>
 	<div class="nav p-2">
@@ -60,7 +64,10 @@
 			</div>
 		</div>
 
-		<ButtonNewInvoice @click="store.openForm()" />
+		<ButtonNewInvoice @click="openForm = true" />
+		<Teleport to="#modal">
+			<TheForm v-if="openForm" :mode="active" />
+		</Teleport>
 	</div>
 </template>
 <style lang="scss" scoped>
