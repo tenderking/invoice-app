@@ -1,9 +1,9 @@
 <script setup lang="ts">
-	import ButtonEdit from "./buttons/ButtonEdit.vue";
-	import ButtonDelete from "./buttons/ButtonDelete.vue";
-	import ButtonMarkAsPaid from "./buttons/ButtonMarkAsPaid.vue";
+	import ButtonEdit from "./ButtonEdit.vue";
+	import ButtonDelete from "./ButtonDelete.vue";
+	import ButtonMarkAsPaid from "./ButtonMarkAsPaid.vue";
 	import { useInvoiceStore } from "@/stores/invoiceStore";
-	import TheForm from "./forms/TheForm.vue";
+	import TheForm from "./TheForm.vue";
 	import { ref, computed } from "vue";
 	const store = useInvoiceStore();
 
@@ -37,10 +37,10 @@
 			<h4>{{ getStatus }}</h4>
 		</div>
 		<div class="cta-buttons flex-flow">
-			<ButtonEdit @click="openForm = true" />
-			<Teleport to="#modal">
-				<TheForm v-if="openForm" :mode="active" :id="invoiceId" />
-			</Teleport>
+			<router-link :to="{ name: 'InvoicesEdit', params: { id: invoiceId } }">
+				<ButtonEdit />
+			</router-link>
+
 			<ButtonDelete />
 			<ButtonMarkAsPaid @click="store.setStatusAsPaid(invoiceId)" />
 		</div>

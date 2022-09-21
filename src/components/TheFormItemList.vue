@@ -45,8 +45,8 @@
 
 <script setup lang="ts">
 	import TheFormBaseInput from "./TheFormBaseInput.vue";
-	import IconDelete from "../icons/IconDelete.vue";
-	import ButtonAdd from "../buttons/ButtonAdd.vue";
+	import IconDelete from "./icons/IconDelete.vue";
+	import ButtonAdd from "./ButtonAdd.vue";
 	// import type { Item } from "@/utils/model";
 	// import type { PropType } from "vue";
 	import { useFormStore } from "@/stores/formStore";

@@ -4,6 +4,7 @@
 	import { useInvoiceStore } from "@/stores/invoiceStore";
 	import type { MyObj } from "@/utils/model";
 	import type { PropType } from "vue";
+
 	const store = useInvoiceStore();
 	const props = defineProps({
 		item: {
@@ -31,25 +32,21 @@
 			"--bg-color": bgColor,
 		};
 	});
-
-	const invoiceAction = () => {
-		props.item?.status === "draft"
-			? store.editForm(props.item?.id)
-			: store.viewById(props.item?.id);
-	};
 </script>
 <template>
-	<div class="item grid-flow p-2" @click="invoiceAction()">
-		<h4 class="id" :value="item.id">#{{ item.id }}</h4>
-		<p class="due"><span>Due </span> {{ item.paymentDue }}</p>
+	<router-link :to="{ name: 'InvoicesShow', params: { id: item.id } }">
+		<div class="item grid-flow p-2">
+			<h4 class="id" :value="item.id">#{{ item.id }}</h4>
+			<p class="due"><span>Due </span> {{ item.paymentDue }}</p>
 
-		<p class="client-name">{{ item.clientName }}</p>
-		<h3 class="total">£{{ item.total.toFixed(2) }}</h3>
+			<p class="client-name">{{ item.clientName }}</p>
+			<h3 class="total">£{{ item.total.toFixed(2) }}</h3>
 
-		<h4 class="status" :style="statusColors">● {{ item.status }}</h4>
+			<h4 class="status" :style="statusColors">● {{ item.status }}</h4>
 
-		<IconArrowRight class="right-arrow" />
-	</div>
+			<IconArrowRight class="right-arrow" />
+		</div>
+	</router-link>
 </template>
 <style lang="scss" scoped>
 	.grid-flow {

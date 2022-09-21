@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-	import ButtonBase from "../buttons/ButtonBase.vue";
+	import ButtonBase from "./ButtonBase.vue";
 	import { useInvoiceStore } from "@/stores/invoiceStore";
-	import ButtonCancel from "../buttons/ButtonCancel.vue";
+	import ButtonCancel from "./ButtonCancel.vue";
 	const store = useInvoiceStore();
 </script>
 <template>

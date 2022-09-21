@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-	import ButtonBase from "../buttons/ButtonBase.vue";
+	import ButtonBase from "./ButtonBase.vue";
 	import { useInvoiceStore } from "@/stores/invoiceStore";
 	const store = useInvoiceStore();
 </script>

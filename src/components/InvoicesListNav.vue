@@ -1,9 +1,9 @@
 <script lang="ts" setup>
 	import { useInvoiceStore } from "@/stores/invoiceStore";
 	import { ref } from "vue";
-	import ButtonNewInvoice from "./buttons/ButtonNewInvoice.vue";
+	import ButtonNewInvoice from "./ButtonNewInvoice.vue";
 	import IconArrowDown from "./icons/IconArrowDown.vue";
-	import TheForm from "@/components/forms/TheForm.vue";
+	import TheForm from "@/components/TheForm.vue";
 	const isShowFilterMOdal = ref(false);
 
 	const openForm = ref(false);
@@ -63,8 +63,10 @@
 				</label>
 			</div>
 		</div>
+		<router-link to="/invoices/create">
+			<ButtonNewInvoice />
+		</router-link>
 
-		<ButtonNewInvoice @click="openForm = true" />
 		<Teleport to="#modal">
 			<TheForm v-if="openForm" :mode="active" />
 		</Teleport>

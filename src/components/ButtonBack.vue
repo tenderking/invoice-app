@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 	import { useInvoiceStore } from "@/stores/invoiceStore";
-	import IconArrowLeft from "../icons/IconArrowLeft.vue";
+	import IconArrowLeft from "@/components/icons/IconArrowLeft.vue";
 	const store = useInvoiceStore();
 </script>
 <template>
