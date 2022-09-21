@@ -10,8 +10,8 @@
 </template>
 <script lang="ts" setup>
 	import { useInvoiceStore } from "@/stores/invoiceStore";
-	import InvoicesListItem from "./InvoicesListItem.vue";
-	import InvoicesListNav from "./InvoicesListNav.vue";
+	import InvoicesListItem from "@/components/InvoicesListItem.vue";
+	import InvoicesListNav from "@/components/InvoicesListNav.vue";
 
 	const store = useInvoiceStore();
 </script>

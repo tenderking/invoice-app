@@ -1,20 +1,29 @@
 <script lang="ts" setup>
 	import { useInvoiceStore } from "@/stores/invoiceStore";
 	// import { computed } from "vue";
-	import ViewInvoiceNav from "./ViewInvoiceNav.vue";
-	import ButtonBack from "./buttons/ButtonBack.vue";
+	import ViewInvoiceNav from "@/components/ViewInvoiceNav.vue";
+	import ButtonBack from "@/components/ButtonBack.vue";
 
 	const store = useInvoiceStore();
+	import { computed } from "vue";
+	import { useRouter, useRoute } from "vue-router";
+	const router = useRouter();
+	const route = useRoute();
 
-	/*
-	invoice must be in a computed to register changes coming from the store.
-	*/
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	const invoice = store.getSelectedInvoice!;
+	const invoiceId = computed(() => {
+		return route.params.id;
+	});
+
+	const invoice = computed(() => {
+		console.log(invoiceId.value);
+		return store.getInvoices.find((invoice) => invoice.id === invoiceId.value);
+	});
 </script>
 <template>
 	<div class="view-invoice__main">
-		<ButtonBack />
+		<router-link to="/">
+			<ButtonBack />
+		</router-link>
 		<ViewInvoiceNav :invoiceId="invoice.id" />
 		<div class="container wrapper-1 p-2 br-8 shadow-invoice">
 			<div class="company flex-flow">
