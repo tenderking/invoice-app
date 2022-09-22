@@ -7,6 +7,7 @@
 			<InvoicesListItem :item="item" />
 		</template>
 	</div>
+	<router-view></router-view>
 </template>
 <script lang="ts" setup>
 	import { useInvoiceStore } from "@/stores/invoiceStore";

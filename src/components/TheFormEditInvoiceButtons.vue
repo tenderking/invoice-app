@@ -6,12 +6,10 @@
 </script>
 <template>
 	<div class="form-btns">
-		<ButtonCancel class="cancel-btn" @click="store.discardForm()"
-			>Cancel</ButtonCancel
-		>
-		<ButtonBase class="save-btn" @click="store.onUpdateForm()">
-			Save Changes</ButtonBase
-		>
+		<router-link to="/">
+			<ButtonCancel class="cancel-btn">Cancel</ButtonCancel>
+			<ButtonBase class="save-btn"> Save Changes</ButtonBase>
+		</router-link>
 	</div>
 </template>
 <style lang="scss" scoped>

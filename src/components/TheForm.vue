@@ -7,10 +7,10 @@
 	import TheFormEditInvoiceButtonsVue from "./TheFormEditInvoiceButtons.vue";
 	// import { useInvoiceStore } from "@/stores/invoiceStore";
 	// 	import { shallowRef, computed } from "vue";
-	import { useFormStore } from "@/stores/formStore";	
+	import { useFormStore } from "@/stores/formStore";
 	const store = useFormStore();
 	const props = defineProps({
-		mode: {
+		isEditMode: {
 			type: Boolean,
 			required: true,
 		},
@@ -23,7 +23,7 @@
 	<div class="form-modal">
 		<div class="form-container">
 			<h2 class="pb-2">
-				{{ props.mode ? "Edit invoice" : "New Invoice" }}
+				{{ props.isEditMode ? "Edit invoice" : "New Invoice" }}
 			</h2>
 			<form action="Get" @submit.prevent="">
 				<h4 class="primary pb-1">Bill From</h4>
@@ -60,7 +60,9 @@
 				<TheFormItemList />
 				<component
 					:is="
-						mode ? TheFormEditInvoiceButtonsVue : TheFormNewInvoiceButtonsVue
+						isEditMode
+							? TheFormEditInvoiceButtonsVue
+							: TheFormNewInvoiceButtonsVue
 					"
 				></component>
 			</form>
@@ -74,7 +76,7 @@
 
 	.form-modal {
 		position: absolute;
-		outline: solid;
+
 		max-height: 100vh;
 		width: 100vw;
 		background-color: var(--overlay);

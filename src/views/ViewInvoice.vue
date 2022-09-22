@@ -1,13 +1,12 @@
 <script lang="ts" setup>
 	import { useInvoiceStore } from "@/stores/invoiceStore";
-	// import { computed } from "vue";
+
 	import ViewInvoiceNav from "@/components/ViewInvoiceNav.vue";
 	import ButtonBack from "@/components/ButtonBack.vue";
 
-	const store = useInvoiceStore();
 	import { computed } from "vue";
-	import { useRouter, useRoute } from "vue-router";
-	const router = useRouter();
+	import { useRoute } from "vue-router";
+	const store = useInvoiceStore();
 	const route = useRoute();
 
 	const invoiceId = computed(() => {
@@ -15,12 +14,11 @@
 	});
 
 	const invoice = computed(() => {
-		console.log(invoiceId.value);
 		return store.getInvoices.find((invoice) => invoice.id === invoiceId.value);
 	});
 </script>
 <template>
-	<div class="view-invoice__main">
+	<div class="view-invoice__main" v-if="invoice">
 		<router-link to="/">
 			<ButtonBack />
 		</router-link>
@@ -84,6 +82,7 @@
 			</div>
 		</div>
 	</div>
+	<router-view></router-view>
 </template>
 <style lang="scss" scoped>
 	.view-invoice__main {

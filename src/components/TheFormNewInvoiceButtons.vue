@@ -5,15 +5,11 @@
 </script>
 <template>
 	<div class="form-btns">
-		<ButtonBase class="discard-btn" type="reset" @click="store.discardForm()"
-			>Discard</ButtonBase
-		>
-		<ButtonBase class="draft-btn" @click="store.onSubmitDraft()">
-			Save as Draft</ButtonBase
-		>
-		<ButtonBase class="send-btn" @click="store.onSubmit()">
-			Save & Send</ButtonBase
-		>
+		<router-link to="/">
+			<ButtonBase class="discard-btn" type="reset">Discard</ButtonBase>
+			<ButtonBase class="draft-btn"> Save as Draft</ButtonBase>
+			<ButtonBase class="send-btn"> Save & Send</ButtonBase>
+		</router-link>
 	</div>
 </template>
 <style lang="scss" scoped>

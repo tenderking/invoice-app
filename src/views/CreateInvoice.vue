@@ -2,5 +2,7 @@
 	import TheForm from "@/components/TheForm.vue";
 </script>
 <template>
-	<TheForm />
+	<teleport to="#modal">
+		<TheForm :isEditMode="false" />
+	</teleport>
 </template>

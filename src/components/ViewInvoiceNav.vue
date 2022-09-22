@@ -3,20 +3,21 @@
 	import ButtonDelete from "./ButtonDelete.vue";
 	import ButtonMarkAsPaid from "./ButtonMarkAsPaid.vue";
 	import { useInvoiceStore } from "@/stores/invoiceStore";
-	import TheForm from "./TheForm.vue";
-	import { ref, computed } from "vue";
+	import { computed } from "vue";
 	const store = useInvoiceStore();
 
-	const openForm = ref(false);
-	const active = true;
-	defineProps({
+	const props = defineProps({
 		invoiceId: {
 			type: String,
 			required: true,
 		},
 	});
 
-	const getStatus = computed(() => store.getSelectedInvoice.status);
+	const getStatus = computed(
+		() =>
+			store.getInvoices.find((invoice) => invoice.id === props.invoiceId)
+				?.status
+	);
 	const statusColors = computed(() => {
 		let textColor = "";
 		let bgColor = "";
@@ -69,7 +70,7 @@
 		}
 		.cta-buttons {
 			position: fixed;
-			z-index: 1;
+
 			bottom: 0;
 			left: 0;
 			background-color: var(--color-background-mute);
