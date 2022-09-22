@@ -5,12 +5,12 @@
 
 	--secondary-10: hsl(233, 29%, 11%);
 	--secondary-15: hsl(233, 31%, 17%);
-	--secondary-20: hsl(233, 31%, 21%);
+	--secondary-20: #252946;
 	--secondary-60: hsl(231, 37%, 63%);
 	--secondary-90: hsl(231, 67%, 99%);
 
 	--neutral-10: hsl(228, 28%, 7%);
-	--neutral-40: hsla(231, 20%, 27%, 1);
+	--neutral-40: #373b53;
 	--neutral-405: hsla(231, 20%, 27%, 0.057);
 	--neutral-60: hsl(231, 20%, 61%);
 	--neutral-80: hsl(231, 72%, 93%);
@@ -65,13 +65,13 @@
 }
 .dark {
 	--color-background: var(--secondary-10);
-	--color-background-mute: var(--secondary-10);
-	--color-background-soft: var(--secondary-15);
+	--color-background-mute: var(--secondary-15);
+	--color-background-soft: var(--secondary-20);
 	--color-background-misc: var(--neutral-10);
 	--color-background-nav: var(--secondary-15);
 	--color-text: var(--neutral-100);
 	--color-text-soft: var(--neutral-80);
-	--color-btn-light-bg: var(--secondary-20);
+	--color-btn-light-bg: var(--neutral-40);
 	--color-btn-light-text: var(--secondary-60);
 	--color-btn-hover-bg: var(--neutral-100);
 	// --color-btn-hover-text: var(--secondary-60);
