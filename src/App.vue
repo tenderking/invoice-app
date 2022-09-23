@@ -1,6 +1,5 @@
 <script setup lang="ts">
 	import TheNavBar from "./components/TheNavBar.vue";
-	import { useInvoiceStore } from "./stores/invoiceStore";
 </script>
 
 <template>
@@ -10,6 +9,7 @@
 		<router-view />
 	</main>
 </template>
+
 <style lang="scss">
 	#app {
 		height: 100vh;

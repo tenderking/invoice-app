@@ -18,7 +18,7 @@
 			type: String,
 		},
 	});
-</script>
+</script> 
 <template>
 	<div class="form-modal">
 		<div class="form-container">
@@ -69,6 +69,7 @@
 		</div>
 	</div>
 </template>
+
 <style lang="scss">
 	.form-closed {
 		display: none;
@@ -77,7 +78,8 @@
 	.form-modal {
 		position: absolute;
 
-		max-height: 100vh;
+		// max-height: 100vh;
+		min-height:100vh;
 		width: 100vw;
 		background-color: var(--overlay);
 		z-index: 10;
@@ -91,7 +93,7 @@
 			border-radius: 0 2rem;
 			z-index: 10;
 
-			height: 100vh;
+			// height: 100vh;
 			overflow-y: auto;
 
 			.form-adress {

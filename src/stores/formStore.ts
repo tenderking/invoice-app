@@ -75,12 +75,11 @@ export const useFormStore = defineStore('form', {
 			},
     }
   },
- 
+
   actions: {
   
     onSubmit() {
 			this.updateInvoice(this.payload);
-			this.isShowForm = false;
 			this.payload.status = "pending";
     },
     editForm(id: string) {
