@@ -1,3 +1,32 @@
+<script setup lang="ts">
+	import TheFormBaseInput from "./TheFormBaseInput.vue";
+	import IconDelete from "./icons/IconDelete.vue";
+	import ButtonAdd from "./ButtonAdd.vue";
+
+	import { useFormStore } from "@/stores/formStore";
+	import { computed, reactive } from "vue";
+
+	interface Item {
+		name: string;
+		quantity: number;
+		price: number;
+	}
+	const item: Item = {
+		name: "",
+		quantity: 0,
+		price: 0,
+	};
+
+	const items = reactive([] as Item[]);
+	function addItem() {
+		items.push();
+	}
+	const total = computed(() => 0);
+
+	const store = useFormStore();
+	// const items = computed(() => store.newItem);
+</script>
+
 <template>
 	<div class="list-container">
 		<h3 class="pb-1 soft-color">Item List</h3>
@@ -34,33 +63,15 @@
 							step="0.01"
 						/>
 					</td>
-					<td>{{ item.total }}</td>
+					<td>{{ total }}</td>
 					<td><IconDelete @click="store.deleteItem(index)" /></td>
 				</tr>
 			</tbody>
 		</table>
-		<ButtonAdd @click.prevent="store.addItem()" />
+		<ButtonAdd @click.prevent="addItem()" />
 	</div>
 </template>
 
-<script setup lang="ts">
-	import TheFormBaseInput from "./TheFormBaseInput.vue";
-	import IconDelete from "./icons/IconDelete.vue";
-	import ButtonAdd from "./ButtonAdd.vue";
-	// import type { Item } from "@/utils/model";
-	// import type { PropType } from "vue";
-	import { useFormStore } from "@/stores/formStore";
-	import { computed } from "vue";
-	const store = useFormStore();
-	const items = computed(() => store.newItem);
-
-	// defineProps({
-	// 	modelValue: {
-	// 		type: Array as PropType<Array<Item>>,
-	// 		required: true,
-	// 	},
-	// });
-</script>
 <style lang="scss">
 	table {
 		width: 100%;
