@@ -3,11 +3,11 @@ import TheFormBaseInput from "./TheFormBaseInput.vue";
 import TheFormDatePicker from "./TheFormDatePicker.vue";
 import TheFormSelect from "./TheFormSelect.vue";
 import TheFormItemList from "./TheFormItemList.vue";
-import TheFormNewInvoiceButtonsVue from "./TheFormNewInvoiceButtons.vue";
-import TheFormEditInvoiceButtonsVue from "./TheFormEditInvoiceButtons.vue";
+import NewInvoiceButtons from "./TheFormNewInvoiceButtons.vue";
+import EditInvoiceButtons from "./TheFormEditInvoiceButtons.vue";
 import { reactive, computed } from "vue";
 import { useInvoiceStore } from "@/stores/invoiceStore";
-import type { MyObj } from "@/utils/model";
+import type { Item, MyObj } from "@/utils/model";
 const store = useInvoiceStore();
 const props = defineProps({
   isEditMode: {
@@ -44,14 +44,7 @@ const initPayload = reactive({
     postCode: "",
     country: "",
   },
-  items: [
-    {
-      name: "",
-      quantity: 0,
-      price: 0,
-      total: 0,
-    },
-  ],
+  items: [] as Item[],
   total: 0,
 });
 const payload = computed(() => {
@@ -62,6 +55,7 @@ const payload = computed(() => {
   }
   return initPayload;
 });
+
 function addItem() {
   console.log("adding item");
   if (props.isEditMode) {
@@ -88,6 +82,24 @@ const deleteItem = (index: number) => {
   }
   initPayload.items.splice(index, 1);
 };
+
+function handleSubmit() {
+  // store.$patch((state) => {
+  //   state.invoices.push(initPayload);
+  // });
+  //
+  console.log("submit: ", initPayload);
+}
+function handleSubmitDraft() {
+  // store.invoices.push(initPayload);
+  console.log("draft: ", initPayload);
+  //
+}
+function handleChanges() {
+  // store.invoices.push(editPayload);
+  console.log("edited:", initPayload);
+  //
+}
 // TODO:
 // editmode and newmode payload
 //  --newmode : reactive object that we can apply some changes
@@ -100,7 +112,10 @@ const deleteItem = (index: number) => {
       <h2 class="pb-2">
         {{ props.isEditMode ? "Edit invoice" : "New Invoice" }}
       </h2>
-      <form action="Get" @submit.prevent="">
+      <form
+        action="Get"
+        @submit.prevent="handleSubmit || handleSubmitDraft || handleChanges"
+      >
         <h4 class="primary pb-1">Bill From</h4>
         <TheFormBaseInput
           v-model:modelValue="payload.senderAddress.street"
@@ -183,11 +198,10 @@ const deleteItem = (index: number) => {
           :deleteItemFun="deleteItem"
         />
         <component
-          :is="
-            isEditMode
-              ? TheFormEditInvoiceButtonsVue
-              : TheFormNewInvoiceButtonsVue
-          "
+          :is="isEditMode ? EditInvoiceButtons : NewInvoiceButtons"
+          :handleSubmit="handleSubmit"
+          :handleChange="handleChanges"
+          :handleSubmitDraft="handleSubmitDraft"
         ></component>
       </form>
     </div>

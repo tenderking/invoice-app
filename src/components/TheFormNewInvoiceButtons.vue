@@ -1,7 +1,15 @@
 <script lang="ts" setup>
 import ButtonBase from "./ButtonBase.vue";
-// import { useInvoiceStore } from "@/stores/invoiceStore";
-// const store = useInvoiceStore();
+defineProps({
+  handleSubmit: {
+    type: Function,
+    required: true,
+  },
+  handleSubmitDraft: {
+    type: Function,
+    required: true,
+  },
+});
 </script>
 <template>
   <div class="form-btns">
@@ -9,10 +17,14 @@ import ButtonBase from "./ButtonBase.vue";
       <ButtonBase class="discard-btn" type="reset">Discard</ButtonBase>
     </router-link>
     <router-link to="/">
-      <ButtonBase class="draft-btn"> Save as Draft</ButtonBase>
+      <ButtonBase @submit="handleSubmit()" class="draft-btn">
+        Save as Draft</ButtonBase
+      >
     </router-link>
     <router-link to="/">
-      <ButtonBase class="send-btn"> Save & Send</ButtonBase>
+      <ButtonBase @submit="handleSubmit()" class="send-btn">
+        Save & Send</ButtonBase
+      >
     </router-link>
   </div>
 </template>

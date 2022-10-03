@@ -1,8 +1,13 @@
 <script lang="ts" setup>
 import ButtonBase from "./ButtonBase.vue";
-// import { useInvoiceStore } from "@/stores/invoiceStore";
 import ButtonCancel from "./ButtonCancel.vue";
-// const store = useInvoiceStore();
+
+defineProps({
+  handleChanges: {
+    type: Function,
+    required: true,
+  },
+});
 </script>
 <template>
   <div class="form-btns">
@@ -10,7 +15,9 @@ import ButtonCancel from "./ButtonCancel.vue";
       <ButtonCancel class="cancel-btn">Cancel</ButtonCancel>
     </router-link>
     <router-link to="/">
-      <ButtonBase class="save-btn"> Save Changes</ButtonBase>
+      <ButtonBase type="submit" @submit="handleChanges" class="save-btn">
+        Save Changes</ButtonBase
+      >
     </router-link>
   </div>
 </template>
