@@ -2,53 +2,33 @@
 	import TheFormBaseInput from "./TheFormBaseInput.vue";
 	import IconDelete from "./icons/IconDelete.vue";
 	import ButtonAdd from "./ButtonAdd.vue";
-
-	import { useFormStore } from "@/stores/formStore";
-	import { computed, reactive, type PropType } from "vue";
 	import type { Item } from "@/utils/model";
+	import { computed, type PropType } from "vue";
 
-	// interface Item {
-	// 	name: string;
-	// 	quantity: number;
-	// 	price: number;
-	// }
 	const props = defineProps({
 		modelValue: {
-			type: Array as any,
-			required: false,
+			type: Array as PropType<Item[]>,
+			required: true,
+		},
+		addItemFun: {
+			type: Function,
+			required: true,
+		},
+		deleteItemFun: {
+			type: Function,
+			required: true,
 		},
 	});
+	const emit = defineEmits(["update:modelValue"]);
 
-	const item: Item = reactive({
-		name: "",
-		quantity: 0,
-		price: 0,
-		total: 0,
+	const items = computed({
+		get() {
+			return props.modelValue;
+		},
+		set(value) {
+			return emit("update:modelValue", value);
+		},
 	});
-
-	const itemsList = computed(() => {
-		const items = reactive([] as Item[]);
-		if (props.modelValue) {
-			const data = props.modelValue;
-			const combined = items.concat(data, items);
-			return combined;
-		}
-		return items;
-	});
-
-	function addItem() {
-		itemsList.value.push(item);
-	}
-
-	const total = computed(() => 0);
-
-	const store = useFormStore();
-	// const items = computed(() => store.newItem);
-
-	const deleteItem = (index: number) => {
-		console.log("this is number", index);
-		// items.splice(index, 1);
-	};
 </script>
 
 <template>
@@ -65,11 +45,11 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr v-for="(item, index) in itemsList" :key="item.name">
+				<tr v-for="(item, index) in items" :key="item.name">
 					<td>
 						<TheFormBaseInput
 							id="itemName"
-							:modelValue="item.name"
+							v-model:modelValue="item.name"
 							type="text"
 						/>
 					</td>
@@ -77,7 +57,7 @@
 						<TheFormBaseInput
 							class="number-input"
 							id="qty"
-							:modelValue="item.quantity"
+							v-model:modelValue="item.quantity"
 							type="number"
 							step="0.01"
 						/>
@@ -86,17 +66,18 @@
 						<TheFormBaseInput
 							class="number-input"
 							id="price"
-							:modelValue="item.price"
+							v-model:modelValue="item.price"
 							type="number"
 							step="0.01"
 						/>
 					</td>
 					<td>{{ item.total }}</td>
-					<td><IconDelete @click="deleteItem(index)" /></td>
+					<td><IconDelete @click="deleteItemFun(index)" /></td>
 				</tr>
 			</tbody>
 		</table>
-		<ButtonAdd @click.prevent="addItem()" />
+
+		<ButtonAdd @click.prevent="addItemFun()" />
 	</div>
 </template>
 
