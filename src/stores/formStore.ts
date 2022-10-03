@@ -78,39 +78,39 @@ export const useFormStore = defineStore('form', {
 
   actions: {
   
-    onSubmit() {
-			this.updateInvoice(this.payload);
-			this.payload.status = "pending";
-    },
+    // onSubmit() {
+		// 	this.updateInvoice(this.payload);
+		// 	this.payload.status = "pending";
+    // },
 
 
 
-		onUpdateForm() {
-			this.invoices.filter((invoice) => (invoice.id = this.invoiceId));
-			this.payload.id = randomID();
-			this.isShowForm = false;
-			this.payload.status = "pending";
-			this.updateInvoice(this.payload);
-			console.log("updated form");
-		},
-		onSubmitDraft() {
-			console.log("submitted form");
-    },
-    discardForm() {
-			this.isShowForm = false;
-			this.isViewInvoice = false;
-			this.payload = { ...this.initPayload };
-		},
-		openForm() {
-			this.payload = { ...this.initPayload };
-			this.isShowForm = true;
-    },
-    addItem() {
-			this.payload.items.push({ ...this.newItem });
-		},
-		deleteItem(index: number) {
-			this.payload.items.splice(index);
-		},
+		// onUpdateForm() {
+		// 	this.invoices.filter((invoice) => (invoice.id = this.invoiceId));
+		// 	this.payload.id = randomID();
+		// 	this.isShowForm = false;
+		// 	this.payload.status = "pending";
+		// 	this.updateInvoice(this.payload);
+		// 	console.log("updated form");
+		// },
+		// onSubmitDraft() {
+		// 	console.log("submitted form");
+    // },
+    // discardForm() {
+		// 	this.isShowForm = false;
+		// 	this.isViewInvoice = false;
+		// 	this.payload = { ...this.initPayload };
+		// },
+		// openForm() {
+		// 	this.payload = { ...this.initPayload };
+		// 	this.isShowForm = true;
+    // },
+    // addItem() {
+		// 	this.payload.items.push({ ...this.newItem });
+		// },
+		// deleteItem(index: number) {
+		// 	this.payload.items.splice(index);
+		// },
 	
   },
 
