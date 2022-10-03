@@ -3,9 +3,6 @@
 		<IconLogoBg />
 		<div class="nav">
 			<div class="icon" @click="changeTheme">
-				<!-- use v-model to creat a two way binding -->
-				<!-- we send isMoon as a prop -->
-				<!-- we update value using emit event -->
 				<IconTheme v-model:isMoon="isDark" />
 			</div>
 			<img

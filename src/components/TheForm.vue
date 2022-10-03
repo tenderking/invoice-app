@@ -5,10 +5,12 @@
 	import TheFormItemList from "./TheFormItemList.vue";
 	import TheFormNewInvoiceButtonsVue from "./TheFormNewInvoiceButtons.vue";
 	import TheFormEditInvoiceButtonsVue from "./TheFormEditInvoiceButtons.vue";
-	// import { useInvoiceStore } from "@/stores/invoiceStore";
+	import { useInvoiceStore } from "@/stores/invoiceStore";
 	// 	import { shallowRef, computed } from "vue";
 	import { useFormStore } from "@/stores/formStore";
-	const store = useFormStore();
+	import type EditInvoiceVue from "@/views/EditInvoice.vue";
+	import { computed } from "vue";
+	const store = useInvoiceStore();
 	const props = defineProps({
 		isEditMode: {
 			type: Boolean,
@@ -18,7 +20,49 @@
 			type: String,
 		},
 	});
-</script> 
+
+	const editInvoice = computed(() => {
+		const matchingInvoice = store.getInvoices.find(
+			(invoice) => invoice.id === props.id
+		);
+		// we destructure so thats changes to editPayload wont change our invoices[id] state
+		if (matchingInvoice) {
+			return matchingInvoice;
+		} else {
+			return {
+				id: "",
+				createdAt: "",
+				paymentDue: "",
+				description: "",
+				paymentTerms: 1,
+				clientName: "",
+				clientEmail: "",
+				status: "",
+				senderAddress: {
+					street: "",
+					city: "",
+					postCode: "",
+					country: "",
+				},
+				clientAddress: {
+					street: "",
+					city: "",
+					postCode: "",
+					country: "",
+				},
+				items: [
+					{
+						name: "",
+						quantity: 0,
+						price: 0,
+						total: 0,
+					},
+				],
+				total: 0,
+			};
+		}
+	});
+</script>
 <template>
 	<div class="form-modal">
 		<div class="form-container">
@@ -27,37 +71,82 @@
 			</h2>
 			<form action="Get" @submit.prevent="">
 				<h4 class="primary pb-1">Bill From</h4>
-				<TheFormBaseInput id="adress" label="Street Adress" />
+				<TheFormBaseInput
+					id="adress"
+					:modelValue="editInvoice.senderAddress.street"
+					label="Street Adress"
+				/>
 
 				<div class="form-adress pb-1">
-					<TheFormBaseInput id="city" label="City" />
+					<TheFormBaseInput
+						id="city"
+						:modelValue="editInvoice.senderAddress.city"
+						label="City"
+					/>
 
-					<TheFormBaseInput id="postCode" label="Post Code" />
+					<TheFormBaseInput
+						id="postCode"
+						:modelValue="editInvoice.senderAddress.postCode"
+						label="Post Code"
+					/>
 
-					<TheFormBaseInput id="country" label="Country" />
+					<TheFormBaseInput
+						id="country"
+						:modelValue="editInvoice.senderAddress.country"
+						label="Country"
+					/>
 				</div>
 				<h4 class="primary pb-1">Bill To</h4>
-				<TheFormBaseInput id="name" label="Client's Name" />
+				<TheFormBaseInput
+					id="name"
+					:modelValue="editInvoice.clientName"
+					label="Client's Name"
+				/>
 
-				<TheFormBaseInput id="email" type="email" label="Client's Email" />
+				<TheFormBaseInput
+					id="email"
+					:modelValue="editInvoice.clientEmail"
+					type="email"
+					label="Client's Email"
+				/>
 
-				<TheFormBaseInput id="adress" label="Street Adress" />
+				<TheFormBaseInput
+					id="adress"
+					:modelValue="editInvoice.clientAddress.street"
+					label="Street Adress"
+				/>
 
 				<div class="form-adress">
-					<TheFormBaseInput id="city" label="City" />
+					<TheFormBaseInput
+						id="city"
+						:modelValue="editInvoice.clientAddress.city"
+						label="City"
+					/>
 
-					<TheFormBaseInput id="postCode" label="Post Code" />
+					<TheFormBaseInput
+						id="postCode"
+						:modelValue="editInvoice.clientAddress.postCode"
+						label="Post Code"
+					/>
 
-					<TheFormBaseInput id="country" label="Country" />
+					<TheFormBaseInput
+						id="country"
+						:modelValue="editInvoice.clientAddress.country"
+						label="Country"
+					/>
 				</div>
 				<div class="form-adress">
 					<!-- TODO: -->
 					<TheFormDatePicker />
 					<TheFormSelect />
 				</div>
-				<TheFormBaseInput id="description" label="Project Description" />
+				<TheFormBaseInput
+					id="description"
+					:modelValue="editInvoice.description"
+					label="Project Description"
+				/>
 
-				<TheFormItemList />
+				<TheFormItemList :modelValue="editInvoice.items" />
 				<component
 					:is="
 						isEditMode
@@ -79,7 +168,7 @@
 		position: absolute;
 
 		// max-height: 100vh;
-		min-height:100vh;
+		min-height: 100vh;
 		width: 100vw;
 		background-color: var(--overlay);
 		z-index: 10;

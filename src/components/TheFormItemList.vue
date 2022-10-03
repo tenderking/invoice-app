@@ -1,39 +1,54 @@
 <script setup lang="ts">
-import TheFormBaseInput from './TheFormBaseInput.vue';
-import IconDelete from './icons/IconDelete.vue';
-import ButtonAdd from './ButtonAdd.vue';
+	import TheFormBaseInput from "./TheFormBaseInput.vue";
+	import IconDelete from "./icons/IconDelete.vue";
+	import ButtonAdd from "./ButtonAdd.vue";
 
-import { useFormStore } from '@/stores/formStore';
-import { computed, reactive } from 'vue';
-import { remove } from '@vue/shared';
+	import { useFormStore } from "@/stores/formStore";
+	import { computed, reactive, type PropType } from "vue";
+	import type { Item } from "@/utils/model";
 
-interface Item {
-	name: string;
-	quantity: number;
-	price: number;
-}
+	// interface Item {
+	// 	name: string;
+	// 	quantity: number;
+	// 	price: number;
+	// }
+	const props = defineProps({
+		modelValue: {
+			type: Array as any,
+			required: false,
+		},
+	});
 
-const item: Item = reactive({
-	name: '',
-	quantity: 0,
-	price: 0
-});
+	const item: Item = reactive({
+		name: "",
+		quantity: 0,
+		price: 0,
+		total: 0,
+	});
 
-const items = reactive([] as Item[]);
+	const itemsList = computed(() => {
+		const items = reactive([] as Item[]);
+		if (props.modelValue) {
+			const data = props.modelValue;
+			const combined = items.concat(data, items);
+			return combined;
+		}
+		return items;
+	});
 
-function addItem() {
-	items.push(item);
-}
+	function addItem() {
+		itemsList.value.push(item);
+	}
 
-const total = computed(() => 0);
+	const total = computed(() => 0);
 
-const store = useFormStore();
-// const items = computed(() => store.newItem);
+	const store = useFormStore();
+	// const items = computed(() => store.newItem);
 
-const deleteItem = (index: number) => {
-	console.log('this is number', index);
-	// items.splice(index, 1);
-};
+	const deleteItem = (index: number) => {
+		console.log("this is number", index);
+		// items.splice(index, 1);
+	};
 </script>
 
 <template>
@@ -50,15 +65,19 @@ const deleteItem = (index: number) => {
 				</tr>
 			</thead>
 			<tbody>
-				<tr v-for="(item, index) in items" :key="item.name">
+				<tr v-for="(item, index) in itemsList" :key="item.name">
 					<td>
-						<TheFormBaseInput id="itemName" value="item.name" type="text" />
+						<TheFormBaseInput
+							id="itemName"
+							:modelValue="item.name"
+							type="text"
+						/>
 					</td>
 					<td>
 						<TheFormBaseInput
 							class="number-input"
 							id="qty"
-							value="item.quantity"
+							:modelValue="item.quantity"
 							type="number"
 							step="0.01"
 						/>
@@ -67,12 +86,12 @@ const deleteItem = (index: number) => {
 						<TheFormBaseInput
 							class="number-input"
 							id="price"
-							value="item.price"
+							:modelValue="item.price"
 							type="number"
 							step="0.01"
 						/>
 					</td>
-					<td>{{ total }}</td>
+					<td>{{ item.total }}</td>
 					<td><IconDelete @click="deleteItem(index)" /></td>
 				</tr>
 			</tbody>
@@ -82,7 +101,7 @@ const deleteItem = (index: number) => {
 </template>
 
 <style lang="scss">
-table {
-	width: 100%;
-}
+	table {
+		width: 100%;
+	}
 </style>

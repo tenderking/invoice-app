@@ -82,15 +82,7 @@ export const useFormStore = defineStore('form', {
 			this.updateInvoice(this.payload);
 			this.payload.status = "pending";
     },
-    editForm(id: string) {
-			this.isEditMode = true;
-			const matchingInvoice = this.invoices.find(
-				(invoice) => invoice.id === id
-			);
-			// we destructure so thats changes to editPayload wont change our invoices[id] state
-			if (matchingInvoice) this.payload = { ...matchingInvoice };
-			this.isShowForm = true;
-		},
+
 
 
 		onUpdateForm() {
