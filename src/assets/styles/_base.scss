@@ -7,6 +7,17 @@
 
 	font-weight: normal;
 }
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+	-moz-appearance: textfield;
+}
 
 /* colors depending on theme */
 html {
@@ -52,7 +63,8 @@ h4 {
 	letter-spacing: $font-h4-spacing;
 	text-transform: capitalize;
 }
-p {
+p,
+input {
 	font-size: $fs-body;
 	line-height: $font-body-lh;
 	letter-spacing: $font-body-spacing;

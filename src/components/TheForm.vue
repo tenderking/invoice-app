@@ -5,7 +5,7 @@
 	import TheFormItemList from "./TheFormItemList.vue";
 	import NewInvoiceButtons from "./TheFormNewInvoiceButtons.vue";
 	import EditInvoiceButtons from "./TheFormEditInvoiceButtons.vue";
-	import { reactive, computed } from "vue";
+	import { reactive, computed, ref } from "vue";
 	import { useInvoiceStore } from "@/stores/invoiceStore";
 	import type { Item, Invoice } from "@/types/Invoice";
 	const store = useInvoiceStore();
@@ -105,6 +105,7 @@
 	//  --newmode : reactive object that we can apply some changes
 	//  --editmode : reactive object too.
 	// validate before submitting
+	const foo = ref(0);
 </script>
 <template>
 	<div class="form-modal">
@@ -184,7 +185,7 @@
 				<div class="form-adress">
 					<!-- TODO: -->
 					<TheFormDatePicker />
-					<TheFormSelect />
+					<TheFormSelect v-model:netDays="payload.paymentTerms" />
 				</div>
 				<TheFormBaseInput
 					v-model:modelValue="payload.description"

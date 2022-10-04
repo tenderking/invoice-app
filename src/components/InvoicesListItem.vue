@@ -32,9 +32,15 @@
 			"--bg-color": bgColor,
 		};
 	});
+	function toRoute() {
+		if (props.item.status === "draft") {
+			return { name: "InvoicesEdit", params: { id: props.item.id } };
+		}
+		return { name: "InvoicesShow", params: { id: props.item.id } };
+	}
 </script>
 <template>
-	<router-link :to="{ name: 'InvoicesShow', params: { id: item.id } }">
+	<router-link :to="toRoute()">
 		<div class="item grid-flow p-2">
 			<h4 class="id" :value="item.id">#{{ item.id }}</h4>
 			<p class="due"><span>Due </span> {{ item.paymentDue }}</p>
