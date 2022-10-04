@@ -12,11 +12,11 @@ describe("invoice store", () => {
 		expect(invoices.length).toBeGreaterThan(0);
 	});
 
-	it("filter by all", async () => {
-		const store = useInvoiceStore();
-		const getData = await store.fetchProducts()
-		expect(getData.length).toBeGreaterThan(0);;
-	});
+	// it("filter by all", async () => {
+	// 	const store = useInvoiceStore();
+	// 	const getData = await store.fetchProducts()
+	// 	expect(getData.length).toBeGreaterThan(0);
+	// });
 
 	// it("should have status of paid", () => {
 	// 	const { setStatus, status } = useInvoiceStore();
