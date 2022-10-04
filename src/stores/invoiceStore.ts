@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
-import type { MyObj } from "../utils/model";
-import data from "../utils/data.json";
+import type { Invoice } from "../types/Invoice";
+import data from "../data/data.json";
 
 export const useInvoiceStore = defineStore({
 	id: "invoice",

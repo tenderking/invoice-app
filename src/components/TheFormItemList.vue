@@ -2,7 +2,7 @@
 	import TheFormBaseInput from "./TheFormBaseInput.vue";
 	import IconDelete from "./icons/IconDelete.vue";
 	import ButtonAdd from "./ButtonAdd.vue";
-	import type { Item } from "@/utils/model";
+	import type { Item } from "@/types/Invoice";
 	import { computed, type PropType } from "vue";
 
 	const props = defineProps({

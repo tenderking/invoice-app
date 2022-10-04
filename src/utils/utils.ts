@@ -8,8 +8,8 @@ const randomID = () => {
 	);
 }
 
-function getDueDate(){
-const days = 10;
+function getDueDate(numberOfDays:number){
+const days = numberOfDays;
 const createdAt = new Date(Date.now());
 const calcDate = new Date();
   const dueDate = new Date(calcDate.setDate(createdAt.getDate() + days));

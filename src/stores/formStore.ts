@@ -1,4 +1,4 @@
-import type { MyObj } from "@/utils/model";
+import type { Invoice } from "@/types/Invoice";
 import { defineStore } from "pinia";
 
 export const useFormStore = defineStore('form', {

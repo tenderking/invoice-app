@@ -19,7 +19,7 @@ export interface Item {
 	total: number;
 }
 
-export interface MyObj {
+export interface Invoice {
 	id: string;
 	createdAt: string;
 	paymentDue: string;

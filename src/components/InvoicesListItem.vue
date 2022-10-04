@@ -2,13 +2,13 @@
 	import { computed } from "vue";
 	import IconArrowRight from "./icons/IconArrowRight.vue";
 	import { useInvoiceStore } from "@/stores/invoiceStore";
-	import type { MyObj } from "@/utils/model";
+	import type { Invoice } from "@/types/Invoice";
 	import type { PropType } from "vue";
 
 	const store = useInvoiceStore();
 	const props = defineProps({
 		item: {
-			type: Object as PropType<MyObj>,
+			type: Object as PropType<Invoice>,
 			required: true,
 		},
 	});
