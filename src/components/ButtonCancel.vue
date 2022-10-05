@@ -1,5 +1,5 @@
 <template>
-	<ButtonBase @click="store.isShowForm = false"> Cancel</ButtonBase>
+	<ButtonBase> Cancel</ButtonBase>
 </template>
 <script setup lang="ts">
 	import ButtonBase from "./ButtonBase.vue";

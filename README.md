@@ -67,6 +67,14 @@ Then crop/optimize/edit your image however you like, add it to your project, and
 
 ### What I learned
 
+There are so many things I have learned in this project. Project structure is important. So I learned to refactor, rename stuff, asked others to look at my code, and when they struggled to understand it I refactor some more so that it became easier for others and me.
+
+I unfortunately chickened out on test driven development. It became overwhelming, since I didn't know what to test. I had to refactor the state management store because I was using it for the wrong purposes. It became too large. It should be used for management reactive data used on multiple components.
+
+I learned to create themes. Even if I'm using sass its better to use css variables or it won't work.
+
+I refactored to use router for better seo. but it turned out to provide simplicity and avoid nested props that got out of control.
+
 Use this section to recap over some of your major learnings while working through this project. Writing these out and providing code samples of areas you want to highlight is a great way to reinforce your own knowledge.
 
 To see how you can add code snippets, see below:
