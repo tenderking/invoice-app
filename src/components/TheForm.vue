@@ -100,12 +100,6 @@
 		console.log("edited:", initPayload);
 		//
 	}
-	// TODO:
-	// editmode and newmode payload
-	//  --newmode : reactive object that we can apply some changes
-	//  --editmode : reactive object too.
-	// validate before submitting
-	const foo = ref(0);
 </script>
 <template>
 	<div class="form-modal">
@@ -183,8 +177,7 @@
 					/>
 				</div>
 				<div class="form-adress">
-					<!-- TODO: -->
-					<TheFormDatePicker />
+					<TheFormDatePicker v-model:modelValue="payload.createdAt" />
 					<TheFormSelect v-model:netDays="payload.paymentTerms" />
 				</div>
 				<TheFormBaseInput

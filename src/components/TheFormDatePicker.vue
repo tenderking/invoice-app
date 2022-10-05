@@ -1,3 +1,12 @@
+<script setup lang="ts">
+	defineProps({
+		modelValue: {
+			type: String,
+			default: "",
+		},
+	});
+	defineEmits(["update:modelValue"]);
+</script>
 <template>
 	<div class="form pb-1">
 		<div class="form-label pb-1">
@@ -7,7 +16,10 @@
 			type="date"
 			name="date"
 			id="date"
-			value="2018-07-22"
+			:value="modelValue"
+			@change="
+				$emit('update:modelValue', ($event.target as HTMLInputElement).value)
+			"
 			class="form-input br-4 p-16"
 		/>
 	</div>
