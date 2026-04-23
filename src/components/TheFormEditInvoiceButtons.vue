@@ -14,11 +14,9 @@ defineProps({
     <router-link to="/">
       <ButtonCancel class="cancel-btn">Cancel</ButtonCancel>
     </router-link>
-    <router-link to="/">
-      <ButtonBase type="submit" @submit="handleChanges" class="save-btn">
-        Save Changes</ButtonBase
-      >
-    </router-link>
+    <ButtonBase type="button" @click="handleChanges()" class="save-btn">
+      Save Changes
+    </ButtonBase>
   </div>
 </template>
 <style lang="scss" scoped>

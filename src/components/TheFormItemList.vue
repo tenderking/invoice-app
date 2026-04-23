@@ -3,7 +3,7 @@
 	import IconDelete from "./icons/IconDelete.vue";
 	import ButtonAdd from "./ButtonAdd.vue";
 	import type { Item } from "@/types/Invoice";
-	import { computed, type PropType } from "vue";
+	import { computed, watch, type PropType } from "vue";
 
 	const props = defineProps({
 		modelValue: {
@@ -29,6 +29,18 @@
 			return emit("update:modelValue", value);
 		},
 	});
+
+	watch(
+		items,
+		(value) => {
+			value.forEach((item) => {
+				const quantity = Number(item.quantity) || 0;
+				const price = Number(item.price) || 0;
+				item.total = quantity * price;
+			});
+		},
+		{ deep: true, immediate: true },
+	);
 </script>
 
 <template>

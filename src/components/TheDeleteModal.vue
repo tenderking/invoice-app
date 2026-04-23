@@ -8,7 +8,7 @@
 			</p>
 			<div class="flex-flow-2">
 				<ButtonCancel @click="closeModal">Cancel</ButtonCancel>
-				<ButtonDelete>Delete</ButtonDelete>
+				<ButtonDelete @click="deleteInvoice">Delete</ButtonDelete>
 			</div>
 		</div>
 	</dialog>
@@ -17,6 +17,11 @@
 	import { onMounted, ref } from "vue";
 	import ButtonCancel from "./ButtonCancel.vue";
 	import ButtonDelete from "./ButtonDelete.vue";
+	import { useInvoiceStore } from "@/stores/invoiceStore";
+	import { useRouter } from "vue-router";
+
+	const store = useInvoiceStore();
+	const router = useRouter();
 
 	const closeModal = () => emits("update:isShowModal", !props.isShowModal);
 	const props = defineProps({
@@ -31,6 +36,13 @@
 	});
 	const emits = defineEmits(["update:isShowModal"]);
 	const dialog = ref<HTMLDialogElement | null>(null);
+
+	function deleteInvoice() {
+		store.deleteInvoice(props.id);
+		emits("update:isShowModal", false);
+		router.push({ name: "Invoices" });
+	}
+
 	onMounted(() => {
 		dialog.value?.showModal();
 	});

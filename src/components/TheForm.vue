@@ -5,10 +5,13 @@
 	import TheFormItemList from "./TheFormItemList.vue";
 	import NewInvoiceButtons from "./TheFormNewInvoiceButtons.vue";
 	import EditInvoiceButtons from "./TheFormEditInvoiceButtons.vue";
-	import { reactive, computed, ref } from "vue";
+	import { reactive, computed } from "vue";
 	import { useInvoiceStore } from "@/stores/invoiceStore";
+	import { useRouter } from "vue-router";
+	import utils from "@/utils/utils";
 	import type { Item, Invoice } from "@/types/Invoice";
 	const store = useInvoiceStore();
+	const router = useRouter();
 	const props = defineProps({
 		isEditMode: {
 			type: Boolean,
@@ -19,9 +22,36 @@
 		},
 	});
 
-	const editPayload = reactive({
-		...store.getInvoices.find((invoice) => invoice.id === props.id),
-	} as Invoice);
+	const selectedInvoice = store.invoices.find((invoice) => invoice.id === props.id);
+
+	const editPayload = reactive(
+		selectedInvoice
+			? (JSON.parse(JSON.stringify(selectedInvoice)) as Invoice)
+			: ({
+					id: "",
+					createdAt: "",
+					paymentDue: "",
+					description: "",
+					paymentTerms: 1,
+					clientName: "",
+					clientEmail: "",
+					status: "",
+					senderAddress: {
+						street: "",
+						city: "",
+						postCode: "",
+						country: "",
+					},
+					clientAddress: {
+						street: "",
+						city: "",
+						postCode: "",
+						country: "",
+					},
+					items: [] as Item[],
+					total: 0,
+				} as Invoice),
+	);
 
 	const initPayload = reactive({
 		id: "",
@@ -57,7 +87,6 @@
 	});
 
 	function addItem() {
-		console.log("adding item");
 		if (props.isEditMode) {
 			editPayload.items.push({
 				name: "",
@@ -75,7 +104,6 @@
 		});
 	}
 	const deleteItem = (index: number) => {
-		console.log("this is number", index);
 		if (props.isEditMode) {
 			editPayload.items.splice(index, 1);
 			return;
@@ -83,22 +111,68 @@
 		initPayload.items.splice(index, 1);
 	};
 
+	function getDueDate(createdAt: string, paymentTerms: number) {
+		if (!createdAt) {
+			return "";
+		}
+
+		const createdDate = new Date(createdAt);
+		if (Number.isNaN(createdDate.getTime())) {
+			return "";
+		}
+
+		const dueDate = utils.getDueDate(Number(paymentTerms));
+		dueDate.setFullYear(createdDate.getFullYear(), createdDate.getMonth(), createdDate.getDate());
+		dueDate.setDate(createdDate.getDate() + Number(paymentTerms));
+
+		return dueDate.toISOString().split("T")[0];
+	}
+
+	function generateUniqueId() {
+		let id = utils.randomID();
+		while (store.invoices.some((invoice) => invoice.id === id)) {
+			id = utils.randomID();
+		}
+		return id;
+	}
+
+	function toInvoiceDraft(status: "pending" | "draft", source: Invoice) {
+		const invoice = JSON.parse(JSON.stringify(source)) as Invoice;
+		invoice.status = status;
+		invoice.paymentTerms = Number(invoice.paymentTerms) || 1;
+		invoice.paymentDue = getDueDate(invoice.createdAt, invoice.paymentTerms);
+		if (!invoice.id) {
+			invoice.id = generateUniqueId();
+		}
+		return invoice;
+	}
+
 	function handleSubmit() {
-		// store.$patch((state) => {
-		//   state.invoices.push(initPayload);
-		// });
-		//
-		console.log("submit: ", initPayload);
+		if (props.isEditMode) {
+			handleChanges();
+			return;
+		}
+
+		store.addInvoice(toInvoiceDraft("pending", initPayload as Invoice));
+		router.push({ name: "Invoices" });
 	}
 	function handleSubmitDraft() {
-		// store.invoices.push(initPayload);
-		console.log("draft: ", initPayload);
-		//
+		if (props.isEditMode) {
+			handleChanges();
+			return;
+		}
+
+		store.addInvoice(toInvoiceDraft("draft", initPayload as Invoice));
+		router.push({ name: "Invoices" });
 	}
 	function handleChanges() {
-		// store.invoices.push(editPayload);
-		console.log("edited:", initPayload);
-		//
+		if (!props.isEditMode || !props.id) {
+			return;
+		}
+
+		const status = (editPayload.status as "pending" | "draft" | "paid") || "pending";
+		store.updateInvoice(toInvoiceDraft(status === "paid" ? "pending" : status, editPayload));
+		router.push({ name: "InvoicesShow", params: { id: props.id } });
 	}
 </script>
 <template>
@@ -107,10 +181,7 @@
 			<h2 class="pb-2">
 				{{ props.isEditMode ? "Edit invoice" : "New Invoice" }}
 			</h2>
-			<form
-				action="Get"
-				@submit.prevent="handleSubmit || handleSubmitDraft || handleChanges"
-			>
+			<form action="Get" @submit.prevent="handleSubmit">
 				<h4 class="primary pb-1">Bill From</h4>
 				<TheFormBaseInput
 					v-model:modelValue="payload.senderAddress.street"
@@ -194,7 +265,7 @@
 				<component
 					:is="isEditMode ? EditInvoiceButtons : NewInvoiceButtons"
 					:handleSubmit="handleSubmit"
-					:handleChange="handleChanges"
+					:handleChanges="handleChanges"
 					:handleSubmitDraft="handleSubmitDraft"
 				></component>
 			</form>

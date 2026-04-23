@@ -9,15 +9,13 @@
 			:id="id"
 			:type="type"
 			:value="modelValue"
-			@change="
-				$emit('update:modelValue', ($event.target as HTMLInputElement).value)
-			"
+			@input="onInput"
 			class="form-input br-4 p-1"
 		/>
 	</div>
 </template>
 <script setup lang="ts">
-	defineProps({
+	const props = defineProps({
 		id: {
 			type: String,
 			default: "",
@@ -35,7 +33,16 @@
 			default: "text",
 		},
 	});
-	defineEmits(["update:modelValue"]);
+	const emit = defineEmits(["update:modelValue"]);
+
+	function onInput(event: Event) {
+		const value = (event.target as HTMLInputElement).value;
+		if (props.type === "number") {
+			emit("update:modelValue", value === "" ? 0 : Number(value));
+			return;
+		}
+		emit("update:modelValue", value);
+	}
 </script>
 <style lang="scss" scoped>
 	.form {

@@ -16,16 +16,12 @@ defineProps({
     <router-link to="/">
       <ButtonBase class="discard-btn" type="reset">Discard</ButtonBase>
     </router-link>
-    <router-link to="/">
-      <ButtonBase @submit="handleSubmit()" class="draft-btn">
-        Save as Draft</ButtonBase
-      >
-    </router-link>
-    <router-link to="/">
-      <ButtonBase @submit="handleSubmit()" class="send-btn">
-        Save & Send</ButtonBase
-      >
-    </router-link>
+    <ButtonBase @click="handleSubmitDraft()" class="draft-btn" type="button">
+      Save as Draft
+    </ButtonBase>
+    <ButtonBase @click="handleSubmit()" class="send-btn" type="button">
+      Save & Send
+    </ButtonBase>
   </div>
 </template>
 <style lang="scss" scoped>
